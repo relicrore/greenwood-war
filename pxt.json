@@ -1,0 +1,71 @@
+{
+    "name": "Greenwood War Ch. 1",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "arcade-sprite-basics": "github:eugeneredwing8/arcade-sprite-basics#v1.0.1",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "animation": "*",
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "controller": "*",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "arcade-sprite-events": "github:riknoll/arcade-sprite-events#dc93eec8412053ebbd2b8f01cf5b6ae285d28900",
+        "Extra Effects": "github:alexszeto/extra-effects#v3.1.0",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2",
+        "browser-events": "*",
+        "arcade-fancy-text": "github:riknoll/arcade-fancy-text#v0.2.0",
+        "BARRIER team official font": "github:eugeneredwing8/arcade-barrier-font#e8b58b2873a44a5c0927e2bfd1df8e706b1c94f7",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
+        "settings-blocks": "github:microsoft/pxt-settings-blocks#v1.0.0",
+        "Visual-TileMap-Layers": "github:unsignedarduino/visual-tilemap-layers#61b4f4602b416cde3aed546d3f4a6ba1ec05a148",
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
+        "sprite-scaling": "*",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "images.g.jres",
+        "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts",
+        "main.py",
+        "BarrierPalette.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "branch": "v2.0.56",
+        "tag": "v2.0.56",
+        "commits": "https://github.com/microsoft/pxt-arcade/commits/2e47d3464cf6ea715ec6e630834bbe15bc2f6feb",
+        "target": "2.0.61",
+        "pxt": "11.3.59",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj",
+    "palette": [
+        "#000000",
+        "#FFFFFF",
+        "#FF0000",
+        "#AA00AA",
+        "#FFAA55",
+        "#FFDD00",
+        "#0088AA",
+        "#00DD00",
+        "#8899FF",
+        "#00DDFF",
+        "#117700",
+        "#A8A8A8",
+        "#443377",
+        "#DDCC99",
+        "#771100",
+        "#000000"
+    ]
+}
