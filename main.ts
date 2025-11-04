@@ -3221,7 +3221,7 @@ color.pauseUntilFadeDone()
 color.setPalette(
 color.originalPalette
 )
-lvl = 6
+lvl = blockSettings.readNumber("lvl")
 SongStopped = false
 scroller.setLayerImage(scroller.BackgroundLayer.Layer0, img`
     cccccccccccccccccccccccccc5555555555555555555cccccccccccccccccc555555555555555555555555555555ccccccccccccccccccc55555555555555555555cccccccccccccccccccccccccccccccccccccccccccc555555555555555555555555555555cccccccccccccccccccccccccccccccccc
