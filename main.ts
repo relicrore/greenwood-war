@@ -135,25 +135,8 @@ function LevelSetup (Level: number) {
         }
         WaterAnims()
         pauseUntil(() => MoveAbility)
-        for (let value of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
+        for (let value2 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
             OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitbox)
-            sprites.setDataNumber(OilHitbox, "SpawnX", value.x)
-            sprites.setDataNumber(OilHitbox, "SpawnY", value.y)
-            OilHitbox.setFlag(SpriteFlag.Invisible, true)
-            OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-            sprites.setDataSprite(OilHitbox, "image", OilNPC)
-            OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(OilHitbox, value)
-            tiles.setTileAt(value, assets.tile`transparency16`)
-            basics.add_gravity_to(OilHitbox)
-            OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-            OilHealth.setColor(12, 15)
-            OilHealth.setBarBorder(1, 15)
-            OilHealth.max = 2
-            OilHealth.attachToSprite(OilHitbox)
-        }
-        for (let value2 of tiles.getTilesByType(assets.tile`OilRangerSpawner`)) {
-            OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyRHitbox)
             sprites.setDataNumber(OilHitbox, "SpawnX", value2.x)
             sprites.setDataNumber(OilHitbox, "SpawnY", value2.y)
             OilHitbox.setFlag(SpriteFlag.Invisible, true)
@@ -164,21 +147,38 @@ function LevelSetup (Level: number) {
             tiles.setTileAt(value2, assets.tile`transparency16`)
             basics.add_gravity_to(OilHitbox)
             OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+            OilHealth.setColor(12, 15)
+            OilHealth.setBarBorder(1, 15)
+            OilHealth.max = 2
+            OilHealth.attachToSprite(OilHitbox)
+        }
+        for (let value22 of tiles.getTilesByType(assets.tile`OilRangerSpawner`)) {
+            OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyRHitbox)
+            sprites.setDataNumber(OilHitbox, "SpawnX", value22.x)
+            sprites.setDataNumber(OilHitbox, "SpawnY", value22.y)
+            OilHitbox.setFlag(SpriteFlag.Invisible, true)
+            OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+            sprites.setDataSprite(OilHitbox, "image", OilNPC)
+            OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+            tiles.placeOnTile(OilHitbox, value22)
+            tiles.setTileAt(value22, assets.tile`transparency16`)
+            basics.add_gravity_to(OilHitbox)
+            OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
             OilHealth.setColor(14, 15)
             OilHealth.setBarBorder(1, 15)
             OilHealth.max = 2
             OilHealth.attachToSprite(OilHitbox)
         }
-        for (let value of tiles.getTilesByType(assets.tile`OilSurgingSpawner`)) {
+        for (let value3 of tiles.getTilesByType(assets.tile`OilSurgingSpawner`)) {
             OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemySrHitbox)
-            sprites.setDataNumber(OilHitbox, "SpawnX", value.x)
-            sprites.setDataNumber(OilHitbox, "SpawnY", value.y)
+            sprites.setDataNumber(OilHitbox, "SpawnX", value3.x)
+            sprites.setDataNumber(OilHitbox, "SpawnY", value3.y)
             OilHitbox.setFlag(SpriteFlag.Invisible, true)
             OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
             sprites.setDataSprite(OilHitbox, "image", OilNPC)
             OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(OilHitbox, value)
-            tiles.setTileAt(value, assets.tile`transparency16`)
+            tiles.placeOnTile(OilHitbox, value3)
+            tiles.setTileAt(value3, assets.tile`transparency16`)
             basics.add_gravity_to(OilHitbox)
             OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
             OilHealth.setColor(8, 15)
@@ -336,6 +336,13 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeRight`, function (spri
         pause(600)
     })
 })
+function EmptyNearby (Img: Sprite, x: number, y: number) {
+    if (Img.image.getPixel(x, y - 1) == 0 || Img.image.getPixel(x, y + 1) == 0 || (Img.image.getPixel(x - 1, y) == 0 || Img.image.getPixel(x + 1, y) == 0)) {
+        return true
+    } else {
+        return false
+    }
+}
 function TorrentSayText (speech: string, speed: number, Emotion: number) {
     if (Emotion == 0) {
         CharBox.setImage(assets.image`TorrentStraightFace`)
@@ -351,8 +358,8 @@ function TorrentSayText (speech: string, speed: number, Emotion: number) {
     pause(1000)
 }
 sprites.onOverlap(SpriteKind.EXPLOOOOOOOOODE, SpriteKind.Player, function (sprite, otherSprite) {
-    for (let value of sprites.allOfKind(SpriteKind.EXPLOOOOOOOOODE)) {
-        value.vx = 0
+    for (let value4 of sprites.allOfKind(SpriteKind.EXPLOOOOOOOOODE)) {
+        value4.vx = 0
     }
     PlayerHealth.value = 0
     SwapSong()
@@ -1182,8 +1189,8 @@ function OilAnims () {
         characterAnimations.rule(Predicate.MovingDown, Predicate.FacingLeft)
         )
     }
-    for (let OilValue of sprites.allOfKind(SpriteKind.EnemyHitboxCutscene)) {
-        SpriteImage = sprites.readDataSprite(OilValue, "image")
+    for (let OilValue2 of sprites.allOfKind(SpriteKind.EnemyHitboxCutscene)) {
+        SpriteImage = sprites.readDataSprite(OilValue2, "image")
         characterAnimations.loopFrames(
         SpriteImage,
         assets.animation`Idle Oil Left`,
@@ -1245,8 +1252,8 @@ function OilAnims () {
         characterAnimations.rule(Predicate.MovingDown, Predicate.FacingLeft)
         )
     }
-    for (let OilValue of sprites.allOfKind(SpriteKind.DieselHitbox)) {
-        SpriteImage = sprites.readDataSprite(OilValue, "image")
+    for (let OilValue3 of sprites.allOfKind(SpriteKind.DieselHitbox)) {
+        SpriteImage = sprites.readDataSprite(OilValue3, "image")
         characterAnimations.loopFrames(
         SpriteImage,
         assets.animation`Idle Oil Left`,
@@ -1308,8 +1315,8 @@ function OilAnims () {
         characterAnimations.rule(Predicate.MovingDown, Predicate.FacingLeft)
         )
     }
-    for (let OilValue of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
-        SpriteImage = sprites.readDataSprite(OilValue, "image")
+    for (let OilValue4 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
+        SpriteImage = sprites.readDataSprite(OilValue4, "image")
         characterAnimations.loopFrames(
         SpriteImage,
         assets.animation`Idle Oil Left`,
@@ -1505,8 +1512,8 @@ function CUTSCENE () {
                 sprites.destroy(CharBox)
                 basics.make_sprite_jump(PlayerHitbox, 190)
                 timer.after(325, function () {
-                    for (let value of sprites.allOfKind(SpriteKind.Ally)) {
-                        value.z = -11
+                    for (let value5 of sprites.allOfKind(SpriteKind.Ally)) {
+                        value5.z = -11
                     }
                     Aquifer.z = -11
                     color.startFadeFromCurrent(color.Black, 1000)
@@ -1634,21 +1641,21 @@ function CUTSCENE () {
             TorrentSayText("Then your mission is complete.", fancyText.TextSpeed.VeryFast, 0)
             TorrentSayText("Return to home base.", fancyText.TextSpeed.VeryFast, 0)
             AquiferSayText("Affirmative.", fancyText.TextSpeed.VeryFast, 0)
-            DieselHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.DieselHitbox)
-            basics.add_gravity_to(DieselHitbox)
-            DieselHitbox.setFlag(SpriteFlag.Invisible, true)
-            DieselImage = sprites.create(assets.image`Diesel`, SpriteKind.DieselImage)
-            DieselImage.setFlag(SpriteFlag.GhostThroughWalls, true)
-            sprites.setDataSprite(DieselHitbox, "image", DieselImage)
+            DieselHitbox2 = sprites.create(assets.image`OilHitbox`, SpriteKind.DieselHitbox)
+            basics.add_gravity_to(DieselHitbox2)
+            DieselHitbox2.setFlag(SpriteFlag.Invisible, true)
+            DieselImage2 = sprites.create(assets.image`Diesel`, SpriteKind.DieselImage)
+            DieselImage2.setFlag(SpriteFlag.GhostThroughWalls, true)
+            sprites.setDataSprite(DieselHitbox2, "image", DieselImage2)
             OilAnims()
-            tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(0, 16))
-            DieselHitbox.vx = 200
+            tiles.placeOnTile(DieselHitbox2, tiles.getTileLocation(0, 16))
+            DieselHitbox2.vx = 200
             music.play(music.createSoundEffect(WaveShape.Noise, 5000, 0, 0, 255, 450, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
             timer.after(200, function () {
-                DieselHitbox.fx = 300
+                DieselHitbox2.fx = 300
                 AquiferSayText("<shaky><dark purple>DIESEL</dark purple>!?!?<shaky>", fancyText.TextSpeed.VeryFast, 10)
                 timer.after(800, function () {
-                    characterAnimations.setCharacterState(DieselImage, characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving))
+                    characterAnimations.setCharacterState(DieselImage2, characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving))
                 })
                 DieselSayText("<wavy><cyan>AQUIFER</cyan>.</wavy>", fancyText.TextSpeed.VeryFast, 9)
                 AquiferSayText("<shaky>WHAT ARE YOU DOING HERE!?!?!?<shaky>", fancyText.TextSpeed.VeryFast, 13)
@@ -1657,9 +1664,9 @@ function CUTSCENE () {
                 DieselSayText("You have caused too much damage...", fancyText.TextSpeed.VeryFast, 4)
                 DieselSayText("And you <shaky>will</shaky> pay for it!", fancyText.TextSpeed.VeryFast, 9)
                 timer.after(800, function () {
-                    characterAnimations.clearCharacterState(DieselImage)
-                    DieselHitbox.vx = 100
-                    DieselHitbox.fx = 0
+                    characterAnimations.clearCharacterState(DieselImage2)
+                    DieselHitbox2.vx = 100
+                    DieselHitbox2.fx = 0
                     timer.after(1200, function () {
                         SongStopped = true
                         AquiferSayText("<teal>Torrent</teal>, <green>GPS</green>! <shaky>NOW!!!</shaky>", fancyText.TextSpeed.VeryFast, 2)
@@ -1672,8 +1679,8 @@ function CUTSCENE () {
                         SwapSong()
                         timer.after(1000, function () {
                             characterAnimations.clearCharacterState(Aquifer)
-                            sprites.destroy(DieselHitbox)
-                            sprites.destroy(DieselImage)
+                            sprites.destroy(DieselHitbox2)
+                            sprites.destroy(DieselImage2)
                             sprites.destroy(SpeechBalloon)
                             sprites.destroy(CharBox)
                             MoveAbility = true
@@ -1694,21 +1701,21 @@ function CUTSCENE () {
             TorrentSayText("Any sign of <dark purple>Diesel</dark purple>?", fancyText.TextSpeed.VeryFast, 0)
             AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
             TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
-            DieselHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.DieselHitbox)
-            basics.add_gravity_to(DieselHitbox)
-            DieselHitbox.setFlag(SpriteFlag.Invisible, true)
-            DieselImage = sprites.create(assets.image`Diesel`, SpriteKind.DieselImage)
-            DieselImage.setFlag(SpriteFlag.GhostThroughWalls, true)
-            sprites.setDataSprite(DieselHitbox, "image", DieselImage)
+            DieselHitbox2 = sprites.create(assets.image`OilHitbox`, SpriteKind.DieselHitbox)
+            basics.add_gravity_to(DieselHitbox2)
+            DieselHitbox2.setFlag(SpriteFlag.Invisible, true)
+            DieselImage2 = sprites.create(assets.image`Diesel`, SpriteKind.DieselImage)
+            DieselImage2.setFlag(SpriteFlag.GhostThroughWalls, true)
+            sprites.setDataSprite(DieselHitbox2, "image", DieselImage2)
             OilAnims()
-            tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
-            basics.make_sprite_jump(DieselHitbox, 190)
+            tiles.placeOnTile(DieselHitbox2, tiles.getTileLocation(8, 11))
+            basics.make_sprite_jump(DieselHitbox2, 190)
             music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 917, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
             SongStopped = false
             Enemy_Encounter_Diesels_Theme()
             timer.after(500, function () {
-                DieselHitbox.vx = -100
-                DieselHitbox.fx = 100
+                DieselHitbox2.vx = -100
+                DieselHitbox2.fx = 100
                 AquiferSayText("<teal>Torrent</teal>! We've found him!", fancyText.TextSpeed.VeryFast, 2)
                 DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
                 AquiferSayText("You're outnumbered!", fancyText.TextSpeed.VeryFast, 4)
@@ -1717,16 +1724,16 @@ function CUTSCENE () {
                 DieselSayText("That's right...", fancyText.TextSpeed.VeryFast, 4)
                 DieselSayText("So now you can see who's REALLY outnumbered!", fancyText.TextSpeed.VeryFast, 9)
                 DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
-                for (let value of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
+                for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
                     OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
-                    sprites.setDataNumber(OilHitbox, "SpawnX", value.x)
-                    sprites.setDataNumber(OilHitbox, "SpawnY", value.y)
+                    sprites.setDataNumber(OilHitbox, "SpawnX", value6.x)
+                    sprites.setDataNumber(OilHitbox, "SpawnY", value6.y)
                     OilHitbox.setFlag(SpriteFlag.Invisible, true)
                     OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
                     sprites.setDataSprite(OilHitbox, "image", OilNPC)
                     OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-                    tiles.placeOnTile(OilHitbox, value)
-                    tiles.setTileAt(value, assets.tile`MAStone`)
+                    tiles.placeOnTile(OilHitbox, value6)
+                    tiles.setTileAt(value6, assets.tile`MAStone`)
                     basics.add_gravity_to(OilHitbox)
                     OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
                     OilHealth.setColor(12, 15)
@@ -1737,7 +1744,7 @@ function CUTSCENE () {
                     OilHitbox.vx = -100
                     OilHitbox.fx = 300
                     timer.after(500, function () {
-                        tiles.setWallAt(value, true)
+                        tiles.setWallAt(value6, true)
                     })
                 }
                 OilAnims()
@@ -1746,7 +1753,7 @@ function CUTSCENE () {
                 color.pauseUntilFadeDone()
                 Reset()
                 sprites.destroy(SpeechBalloon)
-                tiles.setCurrentTilemap(tilemap`RESET`)
+                tiles.setCurrentTilemap(tilemap`level11`)
                 SpeechBalloon = fancyText.create("<wavy>CHAPTER 2 COMING SOON", 0, 1, customFont.BARRIER_font)
                 SpeechBalloon.setPosition(120, 120)
                 color.startFadeFromCurrent(color.originalPalette, 1000)
@@ -2751,6 +2758,28 @@ function WaterAnims () {
         )
     }
 }
+function Outline (Color: number, Sprite2: Sprite) {
+    for (let index = 0; index <= Sprite2.width - 1; index++) {
+        for (let height = 0; height <= Sprite2.height - 1; height++) {
+            if (Sprite2.image.getPixel(index, height) != 0 && Sprite2.image.getPixel(index, height) != Color) {
+                if (EmptyNearby(Sprite2, index, height)) {
+                    if (Sprite2.image.getPixel(index, height - 1) == 0) {
+                        Sprite2.image.setPixel(index, height - 1, Color)
+                    }
+                    if (Sprite2.image.getPixel(index, height + 1) == 0) {
+                        Sprite2.image.setPixel(index, height + 1, Color)
+                    }
+                    if (Sprite2.image.getPixel(index - 1, height) == 0) {
+                        Sprite2.image.setPixel(index - 1, height, Color)
+                    }
+                    if (Sprite2.image.getPixel(index + 1, height) == 0) {
+                        Sprite2.image.setPixel(index + 1, height, Color)
+                    }
+                }
+            }
+        }
+    }
+}
 scene.onOverlapTile(SpriteKind.EnemySrHitbox, assets.tile`NSSpikeUp`, function (sprite, location) {
     if (basics.get_proximity(
     sprite,
@@ -3175,8 +3204,8 @@ let VIGORtext: fancyText.TextSprite = null
 let LV = 0
 let Intro = false
 let mySprite2: Sprite = null
-let DieselImage: Sprite = null
-let DieselHitbox: Sprite = null
+let DieselImage2: Sprite = null
+let DieselHitbox2: Sprite = null
 let exploding = false
 let size = 0
 let Explosion1: Sprite = null
@@ -3479,44 +3508,44 @@ color.setColor(11, color.parseColorString("#004466"))
 color.setColor(12, color.parseColorString("#000044"))
 CreateMainMenu()
 game.onUpdate(function () {
-    for (let WaterHitbox of sprites.allOfKind(SpriteKind.AllyHitbox)) {
-        if (WaterHitbox.x < PlayerHitbox.x && !(basics.get_proximity(
+    for (let WaterHitbox2 of sprites.allOfKind(SpriteKind.AllyHitbox)) {
+        if (WaterHitbox2.x < PlayerHitbox.x && !(basics.get_proximity(
         PlayerHitbox,
-        WaterHitbox,
+        WaterHitbox2,
         randint(10, 60),
         Way.Horizontally
         ))) {
-            WaterHitbox.vx = 100
-        } else if (WaterHitbox.x > PlayerHitbox.x && !(basics.get_proximity(
+            WaterHitbox2.vx = 100
+        } else if (WaterHitbox2.x > PlayerHitbox.x && !(basics.get_proximity(
         PlayerHitbox,
-        WaterHitbox,
+        WaterHitbox2,
         randint(10, 60),
         Way.Horizontally
         ))) {
-            WaterHitbox.vx = -100
+            WaterHitbox2.vx = -100
         } else {
-            WaterHitbox.vx = 0
+            WaterHitbox2.vx = 0
         }
-        if (WaterHitbox.y > PlayerHitbox.y && !(basics.get_proximity(
+        if (WaterHitbox2.y > PlayerHitbox.y && !(basics.get_proximity(
         PlayerHitbox,
-        WaterHitbox,
+        WaterHitbox2,
         randint(10, 60),
         Way.Vertically
         ))) {
-            if (WaterHitbox.isHittingTile(CollisionDirection.Bottom)) {
-                basics.make_sprite_jump(WaterHitbox, 190)
+            if (WaterHitbox2.isHittingTile(CollisionDirection.Bottom)) {
+                basics.make_sprite_jump(WaterHitbox2, 190)
             }
         }
     }
 })
 game.onUpdate(function () {
-    for (let value2 of sprites.allOfKind(SpriteKind.EnemyHitboxCutscene)) {
-        sprites.readDataSprite(value2, "image").setPosition(value2.x, value2.y)
+    for (let value23 of sprites.allOfKind(SpriteKind.EnemyHitboxCutscene)) {
+        sprites.readDataSprite(value23, "image").setPosition(value23.x, value23.y)
     }
 })
 game.onUpdate(function () {
-    for (let Value22 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
-        sprites.readDataSprite(Value22, "image").setPosition(Value22.x, Value22.y)
+    for (let value22 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
+        sprites.readDataSprite(value22, "image").setPosition(value22.x, value22.y)
     }
 })
 game.onUpdate(function () {
@@ -3537,8 +3566,8 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    for (let value2 of sprites.allOfKind(SpriteKind.EnemyHitbox)) {
-        sprites.readDataSprite(value2, "image").setPosition(value2.x, value2.y)
+    for (let value24 of sprites.allOfKind(SpriteKind.EnemyHitbox)) {
+        sprites.readDataSprite(value24, "image").setPosition(value24.x, value24.y)
     }
 })
 game.onUpdate(function () {
@@ -3551,8 +3580,20 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    for (let value2 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
-        sprites.readDataSprite(value2, "image").setPosition(value2.x, value2.y)
+    for (let value25 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
+        sprites.readDataSprite(value25, "image").setPosition(value25.x, value25.y)
+    }
+})
+game.onUpdate(function () {
+    for (let value of sprites.allOfKind(SpriteKind.AllyHitbox)) {
+        if (basics.get_proximity(
+        PlayerHitbox,
+        value,
+        4,
+        Way.Horizontally
+        )) {
+            Outline(15, Aquifer)
+        }
     }
 })
 game.onUpdate(function () {
@@ -3581,44 +3622,44 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    for (let value2 of sprites.allOfKind(SpriteKind.AllyHitbox)) {
-        sprites.readDataSprite(value2, "image").setPosition(value2.x, value2.y)
+    for (let value26 of sprites.allOfKind(SpriteKind.AllyHitbox)) {
+        sprites.readDataSprite(value26, "image").setPosition(value26.x, value26.y)
     }
 })
 game.onUpdate(function () {
-    for (let value2 of sprites.allOfKind(SpriteKind.AllyHitbox)) {
+    for (let value27 of sprites.allOfKind(SpriteKind.AllyHitbox)) {
         if (!(basics.get_proximity(
-        value2,
+        value27,
         PlayerHitbox,
         scene.screenWidth() / 2,
         Way.Both
         ))) {
-            value2.setPosition(PlayerHitbox.x, PlayerHitbox.y)
+            value27.setPosition(PlayerHitbox.x, PlayerHitbox.y)
             music.play(music.createSoundEffect(WaveShape.Sine, 461, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
             music.play(music.createSoundEffect(WaveShape.Square, 461, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            extraEffects.createSpreadEffectOnAnchor(value2, extraEffects.createSingleColorSpreadEffectData(5, ExtraEffectPresetShape.Spark), 100)
+            extraEffects.createSpreadEffectOnAnchor(value27, extraEffects.createSingleColorSpreadEffectData(5, ExtraEffectPresetShape.Spark), 100)
         }
     }
 })
 game.onUpdate(function () {
-    for (let OilHitbox2 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
-        if (OilHitbox2.isHittingTile(CollisionDirection.Bottom)) {
-            if (OilHitbox2.isHittingTile(CollisionDirection.Left)) {
-                basics.make_sprite_jump(OilHitbox2, 250)
+    for (let OilHitbox22 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
+        if (OilHitbox22.isHittingTile(CollisionDirection.Bottom)) {
+            if (OilHitbox22.isHittingTile(CollisionDirection.Left)) {
+                basics.make_sprite_jump(OilHitbox22, 250)
                 timer.after(randint(100, 800), function () {
                     if (Math.percentChance(50)) {
-                        OilHitbox2.vx = -200
+                        OilHitbox22.vx = -200
                     } else {
-                        OilHitbox2.vx = 200
+                        OilHitbox22.vx = 200
                     }
                 })
-            } else if (OilHitbox2.isHittingTile(CollisionDirection.Right)) {
-                basics.make_sprite_jump(OilHitbox2, 250)
+            } else if (OilHitbox22.isHittingTile(CollisionDirection.Right)) {
+                basics.make_sprite_jump(OilHitbox22, 250)
                 timer.after(randint(100, 800), function () {
                     if (Math.percentChance(50)) {
-                        OilHitbox2.vx = 200
+                        OilHitbox22.vx = 200
                     } else {
-                        OilHitbox2.vx = -200
+                        OilHitbox22.vx = -200
                     }
                 })
             }
@@ -3648,24 +3689,24 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    for (let OilHitbox22 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
-        if (OilHitbox22.isHittingTile(CollisionDirection.Bottom)) {
-            if (OilHitbox22.isHittingTile(CollisionDirection.Left)) {
-                basics.make_sprite_jump(OilHitbox22, 190)
+    for (let OilHitbox222 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
+        if (OilHitbox222.isHittingTile(CollisionDirection.Bottom)) {
+            if (OilHitbox222.isHittingTile(CollisionDirection.Left)) {
+                basics.make_sprite_jump(OilHitbox222, 190)
                 timer.after(randint(100, 800), function () {
                     if (Math.percentChance(50)) {
-                        OilHitbox22.vx = -100
+                        OilHitbox222.vx = -100
                     } else {
-                        OilHitbox22.vx = 100
+                        OilHitbox222.vx = 100
                     }
                 })
-            } else if (OilHitbox22.isHittingTile(CollisionDirection.Right)) {
-                basics.make_sprite_jump(OilHitbox22, 190)
+            } else if (OilHitbox222.isHittingTile(CollisionDirection.Right)) {
+                basics.make_sprite_jump(OilHitbox222, 190)
                 timer.after(randint(100, 800), function () {
                     if (Math.percentChance(50)) {
-                        OilHitbox22.vx = 100
+                        OilHitbox222.vx = 100
                     } else {
-                        OilHitbox22.vx = -100
+                        OilHitbox222.vx = -100
                     }
                 })
             }
@@ -3673,16 +3714,16 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    for (let value of sprites.allOfKind(SpriteKind.DieselImage)) {
-        value.setPosition(DieselHitbox.x, DieselHitbox.y)
+    for (let value7 of sprites.allOfKind(SpriteKind.DieselImage)) {
+        value7.setPosition(DieselHitbox2.x, DieselHitbox2.y)
     }
 })
 game.onUpdateInterval(5000, function () {
-    for (let location of tiles.getTilesByType(assets.tile`LightningCrystal`)) {
-        if (location.x - PlayerHitbox.x < scene.screenWidth() / 2 && location.y - PlayerHitbox.y < scene.screenHeight() / 2) {
+    for (let location2 of tiles.getTilesByType(assets.tile`LightningCrystal`)) {
+        if (location2.x - PlayerHitbox.x < scene.screenWidth() / 2 && location2.y - PlayerHitbox.y < scene.screenHeight() / 2) {
             lightningsprite = sprites.create(assets.image`LightningBolt`, SpriteKind.lightning)
-            lightningsprite.x = location.x + 16
-            lightningsprite.bottom = location.top + 8
+            lightningsprite.x = location2.x + 16
+            lightningsprite.bottom = location2.top + 8
             music.play(music.createSoundEffect(WaveShape.Noise, 2321, 0, 255, 0, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
             music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 2426, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
             music.play(music.createSoundEffect(WaveShape.Noise, 250, 0, 255, 0, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
@@ -3703,15 +3744,15 @@ game.onUpdateInterval(randint(1000, 3500), function () {
     }
 })
 game.onUpdateInterval(750, function () {
-    for (let value of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
+    for (let value8 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
         if (Math.percentChance(75)) {
-            if (PlayerHitbox.x - value.x <= 120 && PlayerHitbox.x - value.x >= 2) {
-                RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeRight`, value, 100, -190)
+            if (PlayerHitbox.x - value8.x <= 120 && PlayerHitbox.x - value8.x >= 2) {
+                RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeRight`, value8, 100, -190)
                 RangerPinecone.setFlag(SpriteFlag.AutoDestroy, false)
                 RangerPinecone.setKind(SpriteKind.EnemyPinecone)
                 basics.add_gravity_to(RangerPinecone)
-            } else if (PlayerHitbox.x - value.x >= -120 && PlayerHitbox.x - value.x <= -2) {
-                RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeLeft`, value, -100, -190)
+            } else if (PlayerHitbox.x - value8.x >= -120 && PlayerHitbox.x - value8.x <= -2) {
+                RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeLeft`, value8, -100, -190)
                 RangerPinecone.setFlag(SpriteFlag.AutoDestroy, false)
                 RangerPinecone.setKind(SpriteKind.EnemyPinecone)
                 basics.add_gravity_to(RangerPinecone)
@@ -3781,40 +3822,40 @@ game.onUpdateInterval(1000, function () {
     }
 })
 game.onUpdateInterval(1000, function () {
-    for (let OilHitbox3 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
+    for (let OilHitbox32 of sprites.allOfKind(SpriteKind.EnemySrHitbox)) {
         if (Math.percentChance(50)) {
-            OilHitbox3.vx = 200
+            OilHitbox32.vx = 200
         } else if (Math.percentChance(50)) {
-            OilHitbox3.vx = -200
+            OilHitbox32.vx = -200
         }
     }
 })
 game.onUpdateInterval(1000, function () {
-    for (let OilHitbox32 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
+    for (let OilHitbox322 of sprites.allOfKind(SpriteKind.EnemyRHitbox)) {
         if (Math.percentChance(50)) {
-            OilHitbox32.vx = 100
+            OilHitbox322.vx = 100
         } else if (Math.percentChance(50)) {
-            OilHitbox32.vx = -100
+            OilHitbox322.vx = -100
         }
     }
 })
 game.onUpdateInterval(150, function () {
-    for (let value of tiles.getTilesByType(assets.tile`Forcefield1`)) {
-        tiles.setTileAt(value, assets.tile`Forcefield2`)
+    for (let value9 of tiles.getTilesByType(assets.tile`Forcefield1`)) {
+        tiles.setTileAt(value9, assets.tile`Forcefield2`)
         timer.after(75, function () {
-            tiles.setTileAt(value, assets.tile`Forcefield1`)
+            tiles.setTileAt(value9, assets.tile`Forcefield1`)
         })
     }
 })
 game.onUpdateInterval(500, function () {
-    for (let value of tiles.getTilesByType(assets.tile`Beam1`)) {
-        tiles.setTileAt(value, assets.tile`Beam2`)
+    for (let value10 of tiles.getTilesByType(assets.tile`Beam1`)) {
+        tiles.setTileAt(value10, assets.tile`Beam2`)
         timer.after(100, function () {
-            tiles.setTileAt(value, assets.tile`Beam3`)
+            tiles.setTileAt(value10, assets.tile`Beam3`)
             timer.after(100, function () {
-                tiles.setTileAt(value, assets.tile`Beam4`)
+                tiles.setTileAt(value10, assets.tile`Beam4`)
                 timer.after(100, function () {
-                    tiles.setTileAt(value, assets.tile`Beam1`)
+                    tiles.setTileAt(value10, assets.tile`Beam1`)
                 })
             })
         })
@@ -3831,8 +3872,8 @@ game.onUpdateInterval(100, function () {
             Sety = 8
             for (let index = 0; index < 25; index++) {
                 Explosion2 = sprites.create(assets.image`EXPLOSIONCHASER`, SpriteKind.EXPLOOOOOOOOODE)
-                for (let location of tiles.getTilesByType(assets.tile`BeaconButton`)) {
-                    Explosion2.x = location.x
+                for (let location3 of tiles.getTilesByType(assets.tile`BeaconButton`)) {
+                    Explosion2.x = location3.x
                     Explosion2.y = Sety
                 }
                 Explosion2.setFlag(SpriteFlag.GhostThroughWalls, true)
