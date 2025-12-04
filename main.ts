@@ -2442,7 +2442,7 @@ scene.setBackgroundImage(ScreenImage)
                 music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
             })
         }
-        if ((0 as any) == ("RESUME GAME" as any)) {
+        if (selection == "RESUME GAME") {
             myMenu.close()
             game.popScene()
         } else {
@@ -2456,7 +2456,7 @@ scene.setBackgroundImage(ScreenImage)
                 music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
             })
         }
-        if ((0 as any) == ("RESUME GAME" as any)) {
+        if (selection == "RESUME GAME") {
             myMenu.close()
             game.popScene()
         } else {
@@ -3589,7 +3589,7 @@ game.onUpdate(function () {
         if (basics.get_proximity(
         PlayerHitbox,
         value,
-        4,
+        10,
         Way.Horizontally
         )) {
             Outline(15, Aquifer)
