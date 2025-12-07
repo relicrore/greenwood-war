@@ -3592,7 +3592,7 @@ game.onUpdate(function () {
         10,
         Way.Horizontally
         )) {
-            Outline(15, Aquifer)
+            Outline(14, Aquifer)
         }
     }
 })
