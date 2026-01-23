@@ -3592,9 +3592,9 @@ game.onUpdate(function () {
         10,
         Way.Horizontally
         )) {
-            Outline(14, Aquifer)
+            Outline(11, Aquifer)
             timer.after(500, function() {
-                Aquifer.image.replace(14, 0)
+                Aquifer.image.replace(11, 0)
             })
         }
     }
