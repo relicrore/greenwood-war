@@ -83,6 +83,7 @@ function LevelSetup(Level: number) {
         Hailing = true
         MoveAbility = true
         SongStopped = false
+        Cold_Hearted_Pale_Hail_Forest()
     } else if (Level == 1) {
         PineconeNumber = 20
         MISSION = 2
