@@ -19,9 +19,36 @@ namespace SpriteKind {
 namespace StatusBarKind {
     export const AllyHealth = StatusBarKind.create()
 }
+function PlaySFX(Sound: string) {
+    if (Sound == "StickSlash") {
+        music.play(music.createSoundEffect(WaveShape.Square, 609, 1623, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 892, 122, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else if (Sound == "StickFlame") {
+        music.play(music.createSoundEffect(WaveShape.Square, 609, 694, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Square, 436, 324, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 124, 2303, 255, 255, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else if (Sound == "PCThrow") {
+        music.play(music.createSoundEffect(WaveShape.Noise, 1058, 448, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Square, 436, 324, 215, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Triangle, 1357, 1072, 255, 255, 300, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else if (Sound == "Jump") {
+
+    } else if (Sound == "DamagePlayer") {
+        music.play(music.createSoundEffect(WaveShape.Noise, 921, 883, 103, 255, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 436, 324, 138, 114, 100, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 903, 216, 255, 157, 100, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else if (Sound == "DamageEnemy") {
+        music.play(music.createSoundEffect(WaveShape.Noise, 1406, 1418, 103, 255, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Square, 1204, 1372, 138, 114, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 1745, 2221, 255, 0, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Sawtooth, 717, 1428, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else {
+
+    }
+}
+
 statusbars.onStatusReached(StatusBarKind.EnemyHealth, statusbars.StatusComparison.LTE, statusbars.ComparisonType.Fixed, 0, function (status) {
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1233, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 636, 1829, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DeathEnemy")
     extraEffects.createSpreadEffectOnAnchor(status.spriteAttachedTo(), extraEffects.createCustomSpreadEffectData(
         [12, 2, 3],
         false,
@@ -56,7 +83,6 @@ function LevelSetup(Level: number) {
         Hailing = true
         MoveAbility = true
         SongStopped = false
-        Cold_Hearted_Pale_Hail_Forest()
     } else if (Level == 1) {
         PineconeNumber = 20
         MISSION = 2
@@ -217,15 +243,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`PHFSpike`, function (sprite, 
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value = 0
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(sprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(sprite, extraEffects.createCustomSpreadEffectData(
@@ -260,15 +283,13 @@ function CreateClrProgMenu() {
     MenuSprite.setPosition(120, 140)
     MenuSprite.onSelectionChanged(function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
-            music.play(music.createSoundEffect(WaveShape.Square, 350, 350, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+PlaySFX("MenuCHange")        }
     })
     MenuSprite.onButtonPressed(controller.A, function (selection, selectedIndex) {
         MenuSprite.close()
         for (let index = 0; index < 4; index++) {
             timer.background(function () {
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                PlaySFX("MenuSelect")
             })
         }
         if (selectedIndex == 0) {
@@ -281,9 +302,9 @@ function CreateClrProgMenu() {
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (MoveAbility) {
-        if (Jumpossibility) {
+        if (JumpPossibility) {
             basics.make_sprite_jump(PlayerHitbox, 190)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 917, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            PlaySFX("Jump")
         }
     }
 })
@@ -307,15 +328,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeRight`, function (spri
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value = 0
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(sprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(sprite, extraEffects.createCustomSpreadEffectData(
@@ -354,7 +372,7 @@ function TorrentSayText(speech: string, speed: number, Emotion: number) {
     }
     fancyText.setText(SpeechBalloon, "<teal>TORRENT</teal>: " + speech)
     fancyText.setFrame(SpeechBalloon, assets.image`Text`)
-    if (!(ShakeSoundStopped)) {
+    if (!(Silent)) {
         fancyText.setAnimationSound(SpeechBalloon, music.createSoundEffect(WaveShape.Square, 356, 215, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear))
     }
     fancyText.animateAtSpeed(SpeechBalloon, speed, fancyText.AnimationPlayMode.UntilDone)
@@ -406,19 +424,20 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                     Pinecone = sprites.createProjectileFromSprite(assets.image`PineconeRight`, PlayerHitbox, 100, -190)
                     Pinecone.setFlag(SpriteFlag.AutoDestroy, false)
                     Pinecone.setKind(SpriteKind.Pinecone)
+                    PlaySFX("PCThrow")
                     basics.add_gravity_to(Pinecone)
                 } else if (characterAnimations.matchesRule(Aquifer, characterAnimations.rule(Predicate.FacingLeft))) {
                     Pinecone = sprites.createProjectileFromSprite(assets.image`PineconeLeft`, PlayerHitbox, -80, -190)
                     Pinecone.setFlag(SpriteFlag.AutoDestroy, false)
                     Pinecone.setKind(SpriteKind.Pinecone)
+                    PlaySFX("PCThrow")
                     basics.add_gravity_to(Pinecone)
                 }
             }
         } else if (WeaponHolding == 1) {
             if (SwordHitsLeft > 0) {
                 SwordHitsLeft += -1
-                music.play(music.createSoundEffect(WaveShape.Square, 609, 1623, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Noise, 892, 122, 215, 0, 300, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("StickSlash")
                 AquiferATKing = true
                 characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
                 characterAnimations.setCharacterAnimationsEnabled(Aquifer, true)
@@ -546,8 +565,7 @@ scene.onOverlapTile(SpriteKind.EnemyRHitbox, assets.tile`NSSpikeUp`, function (s
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("DamageEnemy")
         }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
@@ -577,8 +595,7 @@ scene.onOverlapTile(SpriteKind.EnemyHitbox, assets.tile`PHFSpike`, function (spr
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("DamageEnemy")
         }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
@@ -608,8 +625,7 @@ scene.onOverlapTile(SpriteKind.EnemyRHitbox, assets.tile`PHFSpike`, function (sp
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("DamageEnemy")        
         }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
@@ -653,15 +669,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeUp`, function (sprite,
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value = 0
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(sprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(sprite, extraEffects.createCustomSpreadEffectData(
@@ -761,9 +774,9 @@ function CreateTextSprite() {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (MoveAbility) {
-        if (Jumpossibility) {
+        if (JumpPossibility) {
             basics.make_sprite_jump(PlayerHitbox, 190)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 917, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            PlaySFX("Jump")
         }
     }
 })
@@ -775,9 +788,8 @@ scene.onOverlapTile(SpriteKind.EnemyHitbox, assets.tile`NSSpikeUp`, function (sp
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+            PlaySFX("DamageEnemy")        
+            }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
             sprite.vx = 150
@@ -800,8 +812,7 @@ scene.onOverlapTile(SpriteKind.EnemyHitbox, assets.tile`NSSpikeUp`, function (sp
 })
 sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemySrHitbox, function (sprite, otherSprite) {
     if (Math.percentChance(75)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageAlly")
         basics.make_sprite_jump(otherSprite, 190)
         if (characterAnimations.matchesRule(otherSprite, characterAnimations.rule(Predicate.FacingLeft))) {
             otherSprite.vx = 80
@@ -814,7 +825,7 @@ sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemySrHitbox, function (spr
                 otherSprite.vx = 0
             })
         }
-        music.play(music.createSoundEffect(WaveShape.Noise, 1, 3023, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("StickSlash")
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), false)
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), true)
         characterAnimations.loopFrames(
@@ -887,9 +898,7 @@ sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemySrHitbox, function (spr
 sprites.onOverlap(SpriteKind.EnemyHitbox, SpriteKind.Player, function (sprite, otherSprite) {
     if (AquiferATKing) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+            PlaySFX("DamageEnemy")        }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
             sprite.vx = 80
@@ -905,7 +914,7 @@ sprites.onOverlap(SpriteKind.EnemyHitbox, SpriteKind.Player, function (sprite, o
         statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value += -1
     } else {
         if (Math.percentChance(75)) {
-            music.play(music.createSoundEffect(WaveShape.Noise, 1, 3023, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("StickSlash")            
             characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), false)
             characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), true)
             characterAnimations.loopFrames(
@@ -971,15 +980,12 @@ sprites.onOverlap(SpriteKind.EnemyHitbox, SpriteKind.Player, function (sprite, o
             timer.after(50, function () {
                 scene.cameraShake(3, 200)
                 PlayerHealth.value += -1
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("DamagePlayer")
             })
             if (PlayerHealth.value <= 1) {
                 PlayerHealth.value += -1
                 SwapSong()
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("DeathPlayer")
                 sprites.destroy(otherSprite)
                 sprites.destroy(Aquifer)
                 extraEffects.createSpreadEffectOnAnchor(otherSprite, extraEffects.createCustomSpreadEffectData(
@@ -1020,15 +1026,13 @@ function CreateChapterMenu() {
     MenuSprite.setPosition(120, 140)
     MenuSprite.onSelectionChanged(function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
-            music.play(music.createSoundEffect(WaveShape.Square, 350, 350, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+PlaySFX("MenuCHange")        }
     })
     MenuSprite.onButtonPressed(controller.A, function (selection, selectedIndex) {
         MenuSprite.close()
         for (let index = 0; index < 4; index++) {
             timer.background(function () {
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                PlaySFX("MenuSelect")
             })
         }
         if (selectedIndex == 0) {
@@ -6540,15 +6544,13 @@ function CreateMainMenu() {
     MenuSprite.setPosition(120, 140)
     MenuSprite.onSelectionChanged(function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
-            music.play(music.createSoundEffect(WaveShape.Square, 350, 350, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+PlaySFX("MenuCHange")        }
     })
     MenuSprite.onButtonPressed(controller.A, function (selection, selectedIndex) {
         MenuSprite.close()
         for (let index = 0; index < 4; index++) {
             timer.background(function () {
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                PlaySFX("MenuSelect")
             })
         }
         if (selectedIndex == 0) {
@@ -6600,7 +6602,7 @@ function DieselSayText(speech: string, speed: number, Emotion: number) {
     }
     fancyText.setText(SpeechBalloon, "<dark purple>DIESEL</dark purple>: " + speech)
     fancyText.setFrame(SpeechBalloon, assets.image`Text`)
-    if (!(ShakeSoundStopped)) {
+    if (!(Silent)) {
         fancyText.setAnimationSound(SpeechBalloon, music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 0, 255, 50, SoundExpressionEffect.None, InterpolationCurve.Linear))
     }
     fancyText.animateAtSpeed(SpeechBalloon, speed, fancyText.AnimationPlayMode.UntilDone)
@@ -6928,8 +6930,7 @@ events.wallEvent(SpriteKind.EnemyHitbox, events.simpleWallCondition(events.WallF
 })
 sprites.onOverlap(SpriteKind.Pinecone, SpriteKind.EnemySrHitbox, function (sprite, otherSprite) {
     if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, otherSprite).value > 1) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
     }
     sprites.destroy(sprite)
     basics.make_sprite_jump(otherSprite, 190)
@@ -7047,7 +7048,7 @@ function CUTSCENE() {
             TorrentSayText("Good work. Activate it.", fancyText.TextSpeed.VeryFast, 0)
             AquiferSayText("Copy that.", fancyText.TextSpeed.VeryFast, 0)
             basics.make_sprite_jump(PlayerHitbox, 150)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 917, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            PlaySFX("Jump")
             characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
             timer.after(100, function () {
                 animation.runImageAnimation(
@@ -7056,26 +7057,18 @@ function CUTSCENE() {
                     75,
                     false
                 )
-                music.play(music.createSoundEffect(WaveShape.Square, 1, 1724, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("Punch")
                 timer.after(8 * 75, function () {
                     characterAnimations.setCharacterAnimationsEnabled(Aquifer, true)
                 })
                 timer.after(4 * 75, function () {
-                    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 2005, 255, 0, 2000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                    music.play(music.createSoundEffect(WaveShape.Square, 1, 742, 255, 0, 2000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                    PlaySFX("ChargeUp")
                     timer.after(2000, function () {
                         scene.cameraShake(6, 30000)
                         timer.background(function () {
                             for (let index = 0; index < 25; index++) {
-                                if (!(ShakeSoundStopped)) {
-                                    music.play(music.createSoundEffect(WaveShape.Noise, 75, 75, 255, 255, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                                }
-                            }
-                        })
-                        timer.background(function () {
-                            for (let index = 0; index < 25; index++) {
-                                if (!(ShakeSoundStopped)) {
-                                    music.play(music.createSoundEffect(WaveShape.Noise, 180, 180, 255, 255, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                                if (!(Silent)) {
+                                    PlaySFX("Rumble")
                                 }
                             }
                         })
@@ -7085,9 +7078,9 @@ function CUTSCENE() {
                             AquiferSayText("The entire <wavy>PLATEAU</wavy> is crumbling!!!", fancyText.TextSpeed.VeryFast, 10)
                             TorrentSayText("Uh... Yes.", fancyText.TextSpeed.VeryFast, 0)
                             TorrentSayText("It's a DESTRUCT BUTTON, what'd you expect?", fancyText.TextSpeed.VeryFast, 0)
-                            ShakeSoundStopped = true
+                            Silent = true
                             music.stopAllSounds()
-                            music.play(music.createSoundEffect(WaveShape.Square, 180, 1233, 255, 255, 8000, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                            PlaySFX("ChargeUpIntense")
                             sprites.destroy(SpeechBalloon)
                             sprites.destroy(CharBox)
                             CreateTextSprite()
@@ -7136,7 +7129,7 @@ function CUTSCENE() {
             CreateDiesel()
             tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(0, 16))
             DieselHitbox.vx = 200
-            music.play(music.createSoundEffect(WaveShape.Noise, 5000, 0, 0, 255, 450, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            PlaySFX("Zoom")
             timer.after(200, function () {
                 DieselHitbox.fx = 300
                 AquiferSayText("<shaky><dark purple>DIESEL</dark purple>!?!?<shaky>", fancyText.TextSpeed.VeryFast, 10)
@@ -7191,7 +7184,7 @@ function CUTSCENE() {
             CreateDiesel()
             tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
             basics.make_sprite_jump(DieselHitbox, 190)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 917, 255, 0, 300, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+            PlaySFX("Jump")
             SongStopped = false
             Enemy_Encounter_Diesels_Theme()
             timer.after(500, function () {
@@ -7246,8 +7239,7 @@ function CUTSCENE() {
 }
 sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyHitbox, function (sprite, otherSprite) {
     if (Math.percentChance(75)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageAlly")
         basics.make_sprite_jump(otherSprite, 190)
         if (characterAnimations.matchesRule(otherSprite, characterAnimations.rule(Predicate.FacingLeft))) {
             otherSprite.vx = 80
@@ -7260,7 +7252,7 @@ sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyHitbox, function (sprit
                 otherSprite.vx = 0
             })
         }
-        music.play(music.createSoundEffect(WaveShape.Noise, 1, 3023, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("StickSlash")
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), false)
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), true)
         characterAnimations.loopFrames(
@@ -7357,8 +7349,7 @@ function CreateDiesel() {
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyHitbox, function (sprite, otherSprite) {
     if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, otherSprite).value > 1) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
     }
     sprites.destroy(sprite)
     basics.make_sprite_jump(otherSprite, 190)
@@ -7386,8 +7377,7 @@ browserEvents.Three.onEvent(browserEvents.KeyEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Pinecone, SpriteKind.EnemyRHitbox, function (sprite, otherSprite) {
     if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, otherSprite).value > 1) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
     }
     sprites.destroy(sprite)
     basics.make_sprite_jump(otherSprite, 190)
@@ -7409,8 +7399,7 @@ events.wallEvent(SpriteKind.EnemyRHitbox, events.simpleWallCondition(events.Wall
 })
 scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`NSSpikeDown`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamageAlly")
     if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
         sprite.vx = 150
         timer.after(500, function () {
@@ -7446,9 +7435,7 @@ scene.onOverlapTile(SpriteKind.EnemySrHitbox, assets.tile`PHFSpike`, function (s
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+            PlaySFX("DamageEnemy")        }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
             sprite.vx = 150
@@ -7673,7 +7660,7 @@ sprites.onOverlap(SpriteKind.EnemySrHitbox, SpriteKind.Player, function (sprite,
         statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value += -1
     } else {
         if (Math.percentChance(75)) {
-            music.play(music.createSoundEffect(WaveShape.Noise, 1, 3023, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("StickSlash")            
             characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), false)
             characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), true)
             characterAnimations.loopFrames(
@@ -7739,15 +7726,12 @@ sprites.onOverlap(SpriteKind.EnemySrHitbox, SpriteKind.Player, function (sprite,
             timer.after(50, function () {
                 scene.cameraShake(5, 200)
                 PlayerHealth.value += -2
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("DamagePlayer")
             })
             if (PlayerHealth.value <= 1) {
                 PlayerHealth.value += -1
                 SwapSong()
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+                PlaySFX("DeathPlayer")
                 sprites.destroy(otherSprite)
                 sprites.destroy(Aquifer)
                 extraEffects.createSpreadEffectOnAnchor(otherSprite, extraEffects.createCustomSpreadEffectData(
@@ -7798,15 +7782,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeLeft`, function (sprit
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value = 0
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(sprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(sprite, extraEffects.createCustomSpreadEffectData(
@@ -7884,7 +7865,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.RivalHitbox, function (sprite, o
         SongStopped = false
         Enemy_Encounter_Diesels_Theme()
     }
-    music.play(music.createSoundEffect(WaveShape.Square, 75, 0, 255, 0, 350, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamagePlayer")
     basics.make_sprite_jump(sprite, 190)
     sprite.vx = -100
     characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
@@ -7923,14 +7904,13 @@ function PauseGame() {
     MenuSprite.setPosition(120, 120)
     MenuSprite.onSelectionChanged(function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
-            music.play(music.createSoundEffect(WaveShape.Square, 350, 350, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("MenuChange")        
         }
     })
     MenuSprite.onButtonPressed(controller.A, function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
             timer.background(function () {
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                PlaySFX("MenuSelect")
             })
         }
         if (selection == "RESUME GAME") {
@@ -7943,8 +7923,7 @@ function PauseGame() {
     MenuSprite.onButtonPressed(controller.menu, function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
             timer.background(function () {
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-                music.play(music.createSoundEffect(WaveShape.Sawtooth, 1500, 1500, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+                PlaySFX("MenuSelect")
             })
         }
         if (selection == "RESUME GAME") {
@@ -7991,7 +7970,7 @@ function Reset() {
     Hailing = false
     StormyNS = false
     MoveAbility = false
-    ShakeSoundStopped = false
+    Silent = false
     KILLS = -1
     WeaponHolding = 0
     PineconeNumber = 0
@@ -8034,8 +8013,7 @@ function CreateCh1Menu() {
     MenuSprite.setPosition(120, 140)
     MenuSprite.onSelectionChanged(function (selection, selectedIndex) {
         for (let index = 0; index < 4; index++) {
-            music.play(music.createSoundEffect(WaveShape.Square, 350, 350, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+PlaySFX("MenuCHange")        }
     })
     MenuSprite.onButtonPressed(controller.A, function (selection, selectedIndex) {
         if (selectedIndex <= Lvl) {
@@ -8087,15 +8065,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeDown`, function (sprit
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value = 0
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(sprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(sprite, extraEffects.createCustomSpreadEffectData(
@@ -8121,8 +8096,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`NSSpikeDown`, function (sprit
 })
 scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`NSSpikeRight`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamageAlly")
     if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
         sprite.vx = 150
         timer.after(500, function () {
@@ -8176,7 +8150,7 @@ function AquiferSayText(speech: string, speed: number, Emotion: number) {
     }
     fancyText.setText(SpeechBalloon, "<cyan>AQUIFER</cyan>: " + speech)
     fancyText.setFrame(SpeechBalloon, assets.image`Text`)
-    if (!(ShakeSoundStopped)) {
+    if (!(Silent)) {
         fancyText.setAnimationSound(SpeechBalloon, music.createSoundEffect(WaveShape.Sawtooth, 987, 0, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear))
     }
     fancyText.animateAtSpeed(SpeechBalloon, speed, fancyText.AnimationPlayMode.UntilDone)
@@ -8277,9 +8251,7 @@ scene.onOverlapTile(SpriteKind.EnemySrHitbox, assets.tile`NSSpikeUp`, function (
         Way.Both
     )) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+            PlaySFX("DamageEnemy")        }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
             sprite.vx = 150
@@ -8303,9 +8275,7 @@ scene.onOverlapTile(SpriteKind.EnemySrHitbox, assets.tile`NSSpikeUp`, function (
 sprites.onOverlap(SpriteKind.EnemyRHitbox, SpriteKind.Player, function (sprite, otherSprite) {
     if (AquiferATKing) {
         if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value > 1) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        }
+            PlaySFX("DamageEnemy")        }
         basics.make_sprite_jump(sprite, 190)
         if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
             sprite.vx = 80
@@ -8327,15 +8297,12 @@ sprites.onOverlap(SpriteKind.EnemyPinecone, SpriteKind.Player, function (sprite,
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
     })
     if (PlayerHealth.value <= 1) {
         PlayerHealth.value += -1
         SwapSong()
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 250, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 2251, 1, 255, 0, 900, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 742, 255, 0, 900, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DeathPlayer")
         sprites.destroy(otherSprite)
         sprites.destroy(Aquifer)
         extraEffects.createSpreadEffectOnAnchor(otherSprite, extraEffects.createCustomSpreadEffectData(
@@ -8370,8 +8337,7 @@ browserEvents.Two.onEvent(browserEvents.KeyEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Pinecone, SpriteKind.EnemyHitbox, function (sprite, otherSprite) {
     if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, otherSprite).value > 1) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
     }
     sprites.destroy(sprite)
     basics.make_sprite_jump(otherSprite, 190)
@@ -8390,8 +8356,7 @@ sprites.onOverlap(SpriteKind.Pinecone, SpriteKind.EnemyHitbox, function (sprite,
 })
 sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyRHitbox, function (sprite, otherSprite) {
     if (Math.percentChance(75)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
         basics.make_sprite_jump(otherSprite, 190)
         if (characterAnimations.matchesRule(otherSprite, characterAnimations.rule(Predicate.FacingLeft))) {
             otherSprite.vx = 80
@@ -8404,7 +8369,7 @@ sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyRHitbox, function (spri
                 otherSprite.vx = 0
             })
         }
-        music.play(music.createSoundEffect(WaveShape.Noise, 1, 3023, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("StickSlash")
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), false)
         characterAnimations.setCharacterAnimationsEnabled(sprites.readDataSprite(sprite, "image"), true)
         characterAnimations.loopFrames(
@@ -8476,8 +8441,7 @@ sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyRHitbox, function (spri
 })
 scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`PHFSpike`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamageAlly")
     if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
         sprite.vx = 150
         timer.after(500, function () {
@@ -8495,8 +8459,7 @@ scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`PHFSpike`, function (spri
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.EnemyRHitbox, function (sprite, otherSprite) {
     if (statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, otherSprite).value > 1) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamageEnemy")
     }
     sprites.destroy(sprite)
     basics.make_sprite_jump(otherSprite, 190)
@@ -8548,10 +8511,7 @@ events.spriteEvent(SpriteKind.Player, SpriteKind.Projectile, events.SpriteEvent.
         SwapSong()
         PlayerHitbox.ay = 0
         PlayerHitbox.vy = 0
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 987, 987, 0, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Square, 215, 215, 0, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 215, 215, 0, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Noise, 987, 987, 0, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("WaterFreeze")
         MoveAbility = false
         sprites.destroy(otherSprite)
         timer.after(5500, function () {
@@ -8566,14 +8526,13 @@ events.spriteEvent(SpriteKind.Player, SpriteKind.Projectile, events.SpriteEvent.
     } else {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1163, 1, 255, 0, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        PlaySFX("DamagePlayer")
         sprites.destroy(otherSprite)
     }
 })
 scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`NSSpikeLeft`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamageAlly")
     if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
         sprite.vx = 150
         timer.after(500, function () {
@@ -8661,8 +8620,7 @@ function Cold_Hearted_Pale_Hail_Forest() {
 }
 scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`NSSpikeUp`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1549, 1, 255, 0, 350, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    music.play(music.createSoundEffect(WaveShape.Noise, 882, 1, 255, 0, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    PlaySFX("DamageAlly")
     if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
         sprite.vx = 150
         timer.after(500, function () {
@@ -8704,10 +8662,10 @@ let SpriteImage: Sprite = null
 let AquiferATKing = false
 let Pinecone: Sprite = null
 let WeaponHolding = 0
-let ShakeSoundStopped = false
+let Silent = false
 let SpeechBalloon: fancyText.TextSprite = null
 let CharBox: Sprite = null
-let Jumpossibility = false
+let JumpPossibility = false
 let MenuSprite: miniMenu.MenuSprite = null
 let PlayerHealth: StatusBarSprite = null
 let OilHealth: StatusBarSprite = null
@@ -8820,9 +8778,9 @@ game.onUpdate(function () {
 game.onUpdate(function () {
     if (PlayerHitbox) {
         if (PlayerHitbox.isHittingTile(CollisionDirection.Bottom)) {
-            Jumpossibility = true
+            JumpPossibility = true
         } else {
-            Jumpossibility = false
+            JumpPossibility = false
         }
     }
 })
@@ -8885,8 +8843,7 @@ game.onUpdate(function () {
             Way.Both
         ))) {
             value27.setPosition(PlayerHitbox.x, PlayerHitbox.y)
-            music.play(music.createSoundEffect(WaveShape.Sine, 461, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Square, 461, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("Teleport")
             extraEffects.createSpreadEffectOnAnchor(value27, extraEffects.createSingleColorSpreadEffectData(5, ExtraEffectPresetShape.Spark), 100)
         }
     }
@@ -8974,9 +8931,7 @@ game.onUpdateInterval(5000, function () {
             LightningSprite = sprites.create(assets.image`LightningBolt`, SpriteKind.Lightning)
             LightningSprite.x = location2.x + 16
             LightningSprite.bottom = location2.top + 8
-            music.play(music.createSoundEffect(WaveShape.Noise, 2321, 0, 255, 0, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 2426, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 250, 0, 255, 0, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            PlaySFX("LightningStrike")
             scene.cameraShake(8, 100)
             timer.after(500, function () {
                 sprites.destroyAllSpritesOfKind(SpriteKind.Lightning)
@@ -9000,11 +8955,13 @@ game.onUpdateInterval(750, function () {
                 RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeRight`, value8, 100, -190)
                 RangerPinecone.setFlag(SpriteFlag.AutoDestroy, false)
                 RangerPinecone.setKind(SpriteKind.EnemyPinecone)
+                PlaySFX("PCThrow")
                 basics.add_gravity_to(RangerPinecone)
             } else if (PlayerHitbox.x - value8.x >= -120 && PlayerHitbox.x - value8.x <= -2) {
                 RangerPinecone = sprites.createProjectileFromSprite(assets.image`PineconeLeft`, value8, -100, -190)
                 RangerPinecone.setFlag(SpriteFlag.AutoDestroy, false)
                 RangerPinecone.setKind(SpriteKind.EnemyPinecone)
+                PlaySFX("PCThrow")
                 basics.add_gravity_to(RangerPinecone)
             }
         }
@@ -9014,18 +8971,16 @@ game.onUpdateInterval(randint(2000, 5000), function () {
     if (StormyNS) {
         if (Math.percentChance(50)) {
             scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0b`)
-            music.play(music.createSoundEffect(WaveShape.Noise, 1954, 0, 44, 167, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 496, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            if (!(ShakeSoundStopped)) {
+            PlaySFX("Thunder")
+            if (!(Silent)) {
                 scene.cameraShake(2, 200)
             }
             timer.after(100, function () {
                 scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0`)
                 timer.after(25, function () {
-                    scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0b`)
-                    music.play(music.createSoundEffect(WaveShape.Noise, 1954, 0, 44, 167, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                    music.play(music.createSoundEffect(WaveShape.Noise, 496, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                    if (!(ShakeSoundStopped)) {
+                    scroller.setLayerImage(scroller.BackgroundLayer.Layer0,assets.image`Nitro Stun layer 0b`)
+                    PlaySFX("Thunder")
+                    if (!(Silent)) {
                         scene.cameraShake(2, 200)
                     }
                     timer.after(100, function () {
@@ -9035,18 +8990,16 @@ game.onUpdateInterval(randint(2000, 5000), function () {
             })
         } else {
             scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0a`)
-            music.play(music.createSoundEffect(WaveShape.Noise, 1954, 0, 44, 167, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Noise, 496, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            if (!(ShakeSoundStopped)) {
+            PlaySFX("Thunder")
+            if (!(Silent)) {
                 scene.cameraShake(2, 200)
             }
             timer.after(100, function () {
                 scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0`)
                 timer.after(25, function () {
                     scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0a`)
-                    music.play(music.createSoundEffect(WaveShape.Noise, 1954, 0, 44, 167, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                    music.play(music.createSoundEffect(WaveShape.Noise, 496, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-                    if (!(ShakeSoundStopped)) {
+                    PlaySFX("Thunder")
+                    if (!(Silent)) {
                         scene.cameraShake(2, 200)
                     }
                     timer.after(100, function () {
@@ -9058,7 +9011,7 @@ game.onUpdateInterval(randint(2000, 5000), function () {
     }
 })
 game.onUpdateInterval(2000, function () {
-    if (ShakeSoundStopped) {
+    if (Silent) {
         scene.cameraShake(3, 2500)
     }
 })
