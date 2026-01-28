@@ -32,7 +32,7 @@ function PlaySFX(Sound: string) {
         music.play(music.createSoundEffect(WaveShape.Square, 436, 324, 215, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Triangle, 1357, 1072, 255, 255, 300, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
     } else if (Sound == "Jump") {
-
+        music.play(music.createSoundEffect(WaveShape.Square, 1037, 2036, 81, 94, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
     } else if (Sound == "DamagePlayer") {
         music.play(music.createSoundEffect(WaveShape.Noise, 921, 883, 103, 255, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Noise, 436, 324, 138, 114, 100, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
@@ -42,8 +42,12 @@ function PlaySFX(Sound: string) {
         music.play(music.createSoundEffect(WaveShape.Square, 1204, 1372, 138, 114, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Noise, 1745, 2221, 255, 0, 100, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 717, 1428, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-    } else {
-
+    } else if (Sound == "DeathEnemy") {
+        music.play(music.createSoundEffect(WaveShape.Triangle, 1, 1671, 0, 255, 200, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    } else if (Sound == "DeathPlayer") {
+        music.play(music.createSoundEffect(WaveShape.Sine, 2199, 1, 255, 0, 500, SoundExpressionEffect.Warble, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Triangle, 1731, 1, 113, 119, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        music.play(music.createSoundEffect(WaveShape.Noise, 4287, 1, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
     }
 }
 
@@ -72,6 +76,7 @@ function LevelSetup(Level: number) {
     if (Level == 0) {
         PineconeNumber = 50
         MISSION = 1
+        LvName = "PALE HAIL FOREST:\nMission 1"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Pale Hail Forest layer 0`)
         scroller.scrollBackgroundWithSpeed(-5, 0, scroller.BackgroundLayer.Layer0)
         scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`Pale Hail Forest layer 1`)
@@ -80,13 +85,16 @@ function LevelSetup(Level: number) {
         scroller.setCameraScrollingMultipliers(0.25, 0, scroller.BackgroundLayer.Layer2)
         tiles.setCurrentTilemap(tilemap`PHFm1`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`PHFm1FG`, 100)
-        Hailing = true
-        MoveAbility = true
+        Hailing = false
         SongStopped = false
         Cold_Hearted_Pale_Hail_Forest()
+        timer.after((assets.animation`LevelIntroScreen`.length + 1) * 45, function() {
+            MoveAbility = true
+        })
     } else if (Level == 1) {
         PineconeNumber = 20
         MISSION = 2
+        LvName = "PALE HAIL FOREST:\nMission 2"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Pale Hail Forest layer 0`)
         scroller.scrollBackgroundWithSpeed(-5, 0, scroller.BackgroundLayer.Layer0)
         scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`Pale Hail Forest layer 1`)
@@ -98,6 +106,7 @@ function LevelSetup(Level: number) {
     } else if (Level == 2) {
         PineconeNumber = 20
         MISSION = 0
+        LvName = "PALE HAIL FOREST:\nMission 3"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Pale Hail Forest layer 0`)
         scroller.scrollBackgroundWithSpeed(-5, 0, scroller.BackgroundLayer.Layer0)
         scroller.setLayerImage(scroller.BackgroundLayer.Layer1, assets.image`Pale Hail Forest layer 1`)
@@ -114,6 +123,7 @@ function LevelSetup(Level: number) {
     } else if (Level == 3) {
         PineconeNumber = 20
         MISSION = 4
+        LvName = "NITRO STUN:\nMission 1"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`NSm4BG`, -100)
         tiles.setCurrentTilemap(tilemap`NSm4`)
@@ -121,6 +131,7 @@ function LevelSetup(Level: number) {
     } else if (Level == 4) {
         PineconeNumber = 20
         MISSION = 5
+        LvName = "NITRO STUN:\nMission 2"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`NSm5BG`, -100)
         tiles.setCurrentTilemap(tilemap`NSm5`)
@@ -128,12 +139,14 @@ function LevelSetup(Level: number) {
     } else if (Level == 5) {
         PineconeNumber = 20
         MISSION = 6
+        LvName = "NITRO STUN:\nMission 3"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Nitro Stun layer 0`)
         tiles.setCurrentTilemap(tilemap`NSm6`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`NSm6FG`, 100)
     } else if (Level == 6) {
         PineconeNumber = 20
         MISSION = 7
+        LvName = "MAGMA ASSAULT:\nMission 1"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Magma Assault layer 0`)
         scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)
         tiles.setCurrentTilemap(tilemap`MAm7`)
@@ -141,6 +154,102 @@ function LevelSetup(Level: number) {
     } else {
 
     }
+    LevelIntro(LvName)
+    timer.after(assets.animation`LevelIntroScreen`.length * 45, function() {
+        CreateAquifer()
+        tiles.placeOnRandomTile(PlayerHitbox, assets.tile`START`)
+        tiles.setTileAt(PlayerHitbox.tilemapLocation(), assets.tile`transparency16`)
+        AquiferAnims()
+        CUTSCENE()
+        timer.after(30, function () {
+            for (let value of tiles.getTilesByType(assets.tile`WaterSwordsmanSpawner`)) {
+                WaterHitbox = sprites.create(assets.image`WaterHitbox`, SpriteKind.AllyHitbox)
+                WaterHitbox.setFlag(SpriteFlag.Invisible, true)
+                WaterNPC = sprites.create(assets.image`WaterHitbox`, SpriteKind.Ally)
+                sprites.setDataSprite(WaterHitbox, "image", WaterNPC)
+                WaterNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                tiles.placeOnTile(WaterHitbox, value)
+                tiles.setTileAt(value, assets.tile`transparency16`)
+                basics.add_gravity_to(WaterHitbox)
+            }
+            WaterAnims()
+            pauseUntil(() => MoveAbility)
+            for (let value2 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
+                OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitbox)
+                sprites.setDataNumber(OilHitbox, "SpawnX", value2.x)
+                sprites.setDataNumber(OilHitbox, "SpawnY", value2.y)
+                OilHitbox.setFlag(SpriteFlag.Invisible, true)
+                OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+                sprites.setDataSprite(OilHitbox, "image", OilNPC)
+                OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                tiles.placeOnTile(OilHitbox, value2)
+                tiles.setTileAt(value2, assets.tile`transparency16`)
+                basics.add_gravity_to(OilHitbox)
+                OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+                OilHealth.setColor(12, 15)
+                OilHealth.setBarBorder(1, 15)
+                OilHealth.max = 2
+                OilHealth.attachToSprite(OilHitbox)
+            }
+            for (let value22 of tiles.getTilesByType(assets.tile`OilRangerSpawner`)) {
+                OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyRHitbox)
+                sprites.setDataNumber(OilHitbox, "SpawnX", value22.x)
+                sprites.setDataNumber(OilHitbox, "SpawnY", value22.y)
+                OilHitbox.setFlag(SpriteFlag.Invisible, true)
+                OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+                sprites.setDataSprite(OilHitbox, "image", OilNPC)
+                OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                tiles.placeOnTile(OilHitbox, value22)
+                tiles.setTileAt(value22, assets.tile`transparency16`)
+                basics.add_gravity_to(OilHitbox)
+                OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+                OilHealth.setColor(14, 15)
+                OilHealth.setBarBorder(1, 15)
+                OilHealth.max = 2
+                OilHealth.attachToSprite(OilHitbox)
+            }
+            for (let value3 of tiles.getTilesByType(assets.tile`OilSurgingSpawner`)) {
+                OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemySrHitbox)
+                sprites.setDataNumber(OilHitbox, "SpawnX", value3.x)
+                sprites.setDataNumber(OilHitbox, "SpawnY", value3.y)
+                OilHitbox.setFlag(SpriteFlag.Invisible, true)
+                OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+                sprites.setDataSprite(OilHitbox, "image", OilNPC)
+                OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                tiles.placeOnTile(OilHitbox, value3)
+                tiles.setTileAt(value3, assets.tile`transparency16`)
+                basics.add_gravity_to(OilHitbox)
+                OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+                OilHealth.setColor(8, 15)
+                OilHealth.setBarBorder(1, 15)
+                OilHealth.max = 1
+                OilHealth.attachToSprite(OilHitbox)
+            }
+            OilAnims()
+            SetUpHUD()
+            SetUpOilNum()
+            KILLS = 0
+        })
+    })
+}
+function LevelIntro(Text: string) {
+    CreateTextNoSpeech(Text, 120, 120, 15)
+    LvIntro = sprites.create(assets.image`BlackScreen`)
+    LvIntro.scale = 8
+    LvIntro.z = 1001
+    LvIntro.setFlag(SpriteFlag.Ghost, true)
+    animation.runImageAnimation(
+        LvIntro,
+        assets.animation`LevelIntroScreen`,
+        45,
+        false
+    )
+    timer.after(assets.animation`LevelIntroScreen`.length * 45, function() {
+        sprites.destroy(LvIntro)
+        sprites.destroy(SpeechBalloon)
+    })
+}
+function CreateAquifer() {
     Aquifer = sprites.create(assets.image`WaterHitbox`, SpriteKind.AquiferImage)
     Aquifer.setFlag(SpriteFlag.GhostThroughWalls, true)
     PlayerHitbox = sprites.create(assets.image`WaterHitbox`, SpriteKind.Player)
@@ -148,79 +257,6 @@ function LevelSetup(Level: number) {
     Aquifer.z = 50
     basics.add_gravity_to(PlayerHitbox)
     scene.cameraFollowSprite(PlayerHitbox)
-    tiles.placeOnRandomTile(PlayerHitbox, assets.tile`START`)
-    tiles.setTileAt(PlayerHitbox.tilemapLocation(), assets.tile`transparency16`)
-    AquiferAnims()
-    CUTSCENE()
-    timer.after(30, function () {
-        for (let value of tiles.getTilesByType(assets.tile`WaterSwordsmanSpawner`)) {
-            WaterHitbox = sprites.create(assets.image`WaterHitbox`, SpriteKind.AllyHitbox)
-            WaterHitbox.setFlag(SpriteFlag.Invisible, true)
-            WaterNPC = sprites.create(assets.image`WaterHitbox`, SpriteKind.Ally)
-            sprites.setDataSprite(WaterHitbox, "image", WaterNPC)
-            WaterNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(WaterHitbox, value)
-            tiles.setTileAt(value, assets.tile`transparency16`)
-            basics.add_gravity_to(WaterHitbox)
-        }
-        WaterAnims()
-        pauseUntil(() => MoveAbility)
-        for (let value2 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
-            OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitbox)
-            sprites.setDataNumber(OilHitbox, "SpawnX", value2.x)
-            sprites.setDataNumber(OilHitbox, "SpawnY", value2.y)
-            OilHitbox.setFlag(SpriteFlag.Invisible, true)
-            OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-            sprites.setDataSprite(OilHitbox, "image", OilNPC)
-            OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(OilHitbox, value2)
-            tiles.setTileAt(value2, assets.tile`transparency16`)
-            basics.add_gravity_to(OilHitbox)
-            OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-            OilHealth.setColor(12, 15)
-            OilHealth.setBarBorder(1, 15)
-            OilHealth.max = 2
-            OilHealth.attachToSprite(OilHitbox)
-        }
-        for (let value22 of tiles.getTilesByType(assets.tile`OilRangerSpawner`)) {
-            OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyRHitbox)
-            sprites.setDataNumber(OilHitbox, "SpawnX", value22.x)
-            sprites.setDataNumber(OilHitbox, "SpawnY", value22.y)
-            OilHitbox.setFlag(SpriteFlag.Invisible, true)
-            OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-            sprites.setDataSprite(OilHitbox, "image", OilNPC)
-            OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(OilHitbox, value22)
-            tiles.setTileAt(value22, assets.tile`transparency16`)
-            basics.add_gravity_to(OilHitbox)
-            OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-            OilHealth.setColor(14, 15)
-            OilHealth.setBarBorder(1, 15)
-            OilHealth.max = 2
-            OilHealth.attachToSprite(OilHitbox)
-        }
-        for (let value3 of tiles.getTilesByType(assets.tile`OilSurgingSpawner`)) {
-            OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemySrHitbox)
-            sprites.setDataNumber(OilHitbox, "SpawnX", value3.x)
-            sprites.setDataNumber(OilHitbox, "SpawnY", value3.y)
-            OilHitbox.setFlag(SpriteFlag.Invisible, true)
-            OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-            sprites.setDataSprite(OilHitbox, "image", OilNPC)
-            OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-            tiles.placeOnTile(OilHitbox, value3)
-            tiles.setTileAt(value3, assets.tile`transparency16`)
-            basics.add_gravity_to(OilHitbox)
-            OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-            OilHealth.setColor(8, 15)
-            OilHealth.setBarBorder(1, 15)
-            OilHealth.max = 1
-            OilHealth.attachToSprite(OilHitbox)
-        }
-        OilAnims()
-        SetUpHUD()
-        SetUpOilNum()
-        KILLS = 0
-    })
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`PHFSpike`, function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
@@ -6960,7 +6996,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`FINISHAllDead`, function (spr
 })
 function CUTSCENE() {
     timer.after(30, function () {
-        if (MISSION == 2) {
+        if (MISSION == 1) {
+            
+        } else if (MISSION == 2) {
             PlayerHitbox.vx = 100
             timer.after(900, function () {
                 PlayerHitbox.fx = 300
@@ -7229,14 +7267,18 @@ function CUTSCENE() {
                 Reset()
                 sprites.destroy(SpeechBalloon)
                 tiles.setCurrentTilemap(tilemap`level11`)
-                SpeechBalloon = fancyText.create("<wavy>CHAPTER 2 COMING SOON", 0, 1, customFont.BARRIER_font)
-                SpeechBalloon.setPosition(120, 120)
+                CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
                 color.startFadeFromCurrent(color.originalPalette, 1000)
             })
         } else {
 
         }
     })
+}
+function CreateTextNoSpeech(Text: string, XPos: number, YPos: number, Color: number) {
+    SpeechBalloon = fancyText.create(Text, 0, Color, customFont.BARRIER_font)
+    SpeechBalloon.setPosition(XPos, YPos)
+    SpeechBalloon.z = 1002
 }
 sprites.onOverlap(SpriteKind.AllyHitbox, SpriteKind.EnemyHitbox, function (sprite, otherSprite) {
     if (Math.percentChance(75)) {
@@ -8639,6 +8681,8 @@ scene.onOverlapTile(SpriteKind.AllyHitbox, assets.tile`NSSpikeUp`, function (spr
 })
 
 //variables
+let LvName = "text"
+let LvIntro: Sprite = null
 let Explosion: Sprite = null
 let ExplosionY = 0
 let RangerPinecone: Sprite = null
