@@ -68,5 +68,12 @@
         "#EEEEAA",
         "#772200",
         "#002233"
-    ]
+    ],
+    "theme": {
+        "background-color": "#00DDDD",
+        "button-stroke": "#00CCCC",
+        "text-color": "#FFFFFF",
+        "button-fill": "#00AAAA",
+        "dpad-fill": "#00AAAA"
+    }
 }
