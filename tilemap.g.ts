@@ -101,12 +101,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile59 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile23 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile28 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile60 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile61 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile62 = image.ofBuffer(hex``);
@@ -128,6 +122,14 @@ namespace myTiles {
     export const tile50 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile12 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile64 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile23 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile28 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile60 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -595,6 +597,24 @@ namespace myTiles {
 2222222222222222222222222222222222222222222222222222222222222........22222222222222.....222222222222222222222..........2222222222...........2.....22222222222222222222222222222222..........22222222222..........222222222222222................2222222..2222..
 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222...2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 `, [myTiles.transparency16,myTiles.tile14,myTiles.tile11,myTiles.tile17,myTiles.tile24,myTiles.tile40,myTiles.tile30,myTiles.tile41,myTiles.tile32,myTiles.tile47,myTiles.tile46,myTiles.tile42,myTiles.tile45,myTiles.tile37,myTiles.tile43,myTiles.tile38,myTiles.tile44,myTiles.tile39,myTiles.tile12,myTiles.tile10,myTiles.tile25,myTiles.tile26,myTiles.tile20,myTiles.tile22,myTiles.tile18,myTiles.tile62], TileScale.Sixteen);
+            case "Tutorial":
+            case "Tutorial1":return tiles.createTilemap(hex`0f000f00010101010101010101010101010101010101010101010101010101010101000000000000000400000000000000000000000000000400000000000000000000000000000400000000000000000000000000000300000000000000000000000000000200000000000000000000000000000000000000000000050000000000000000000007000006010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . 
+. . . . . . . 2 . . . . . . . 
+. . . . . . . 2 . . . . . . . 
+. . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,myTiles.tile64,myTiles.tile23,myTiles.tile28,myTiles.tile60,myTiles.tile17,myTiles.tile4,myTiles.tile18], TileScale.Sixteen);
         }
         return null;
     })
@@ -700,12 +720,6 @@ namespace myTiles {
             case "tile58":return tile58;
             case "MAMagmaSurface":
             case "tile59":return tile59;
-            case "TutorialFloor":
-            case "tile23":return tile23;
-            case "myTile":
-            case "tile28":return tile28;
-            case "myTile0":
-            case "tile60":return tile60;
             case "LightningCrystal":
             case "tile61":return tile61;
             case "WaterSwordsmanSpawner":
@@ -727,6 +741,14 @@ namespace myTiles {
             case "tile50":return tile50;
             case "NSSpikeUp":
             case "tile12":return tile12;
+            case "TrainingFloor":
+            case "tile64":return tile64;
+            case "PunchBagBottom":
+            case "tile23":return tile23;
+            case "PunchBagTop":
+            case "tile28":return tile28;
+            case "Chain":
+            case "tile60":return tile60;
         }
         return null;
     })
