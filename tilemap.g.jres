@@ -298,24 +298,6 @@
         "tilemapTile": true,
         "displayName": "MAMagmaSurface"
     },
-    "tile23": {
-        "data": "hwQQABAAAADMzMzMzMzMzBwRERERERHLHBwRERERwcscERERERERyxwRERERERHLHBEREREREcscERERERERyxwRERERERHLHBEREREREcscERERERERyxwREREREbHLHBERERERscscERERERG7yxwcERERu8vLvLu7u7u7u8vMzMzMzMzMzA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "TutorialFloor"
-    },
-    "tile28": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7DLsMuwy7DAy7DLsMuwy7DLsMuwy7DLu7DLsMuwy7DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile"
-    },
-    "tile60": {
-        "data": "hwQQABAAAAD//////////x8RERERERHxHxERERER7fEfEREREdHu8R8RERER7R7xHxEREdHuEfEfERER7d4a8R/RfdHufRrxH9Gn7R5xGvEfodruERER8R8R7R4RERHxH9HuEREREfEf7R4RERER8R/uERERERHxHxEREREREfH//////////w==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile0"
-    },
     "tile61": {
         "data": "hwQQABAAAAAAAAAAAAAAYAAAAAAAAAAWAAAAAAAAYBEAAAAAAAAWEQAAAAAAYBERAAAAAAAWEWEAAAAAYBERZgAAAAAWEWFmAAAAAGZmlpkAAAAAYGZmmQAAAAAAZmaWAAAAAABgZmYAAAAAAABmZgAAAAAAAGBmAAAAAAAAAGYAAAAAAAAAYA==",
         "mimeType": "image/x-mkcd-f4",
@@ -380,6 +362,30 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "NSSpikeUp"
+    },
+    "tile64": {
+        "data": "hwQQABAAAABFREREtbu7u1tERERUu7u7u0VERES1u7u7W0RERFS7u7u7RURERLW7u7tbREREVLu7u7tFREREtbu7u1tERERUtbu7u0VERERUu7u7W0RERES1u7u7RURERFS7u7tbRERERLW7u7tFREREVLu7u1tEREREtbu7u0VERERUu7u7Ww==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "TrainingFloor"
+    },
+    "tile23": {
+        "data": "hwQQABAAAAAiIiIiAAAAACIiIiIiAAAAIiIiIiIiAAAiIiIiIiICACIiIiIiIiIAIiIiIiIiIgAiIiIiIiIiACIiIiIiIuIAIiIiIiIi4gAiIiIiIiLuACIiIiIiIu4AIiIiIiLi7gAiIiIi4u4OACIiIuLu7gAAIiIi7u4AAAAiIiLuAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "PunchBagBottom"
+    },
+    "tile28": {
+        "data": "hwQQABAAAAAAAAAAIiIiIgAAACIiESIiAAAiIhHdIiIAICIR3SIiIgAiEt0iIiIiACLRIiIiIiILEi0iIiIiIrASLSIiIiIiCyIiIiIiIiIAIiIiIiIiIgAiIiIiIiIiACIiIiIiIiIAICIiIiIiIgAAIiIiIiIiAAAAIiIiIiIAAAAAIiIiIg==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "PunchBagTop"
+    },
+    "tile60": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALCwsLCwsLC7CwsLCwsLCwCwsLCwsLCwsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "Chain"
     },
     "level6": {
         "id": "level6",
@@ -672,6 +678,22 @@
             "myTiles.tile62"
         ],
         "displayName": "NSm5"
+    },
+    "Tutorial1": {
+        "id": "Tutorial1",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwZjAwMGYwMDAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA1MDAwMDAwMDAwMDAwMDAwMDAwMDAwNzAwMDAwNjAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMDI=",
+        "tileset": [
+            "myTiles.transparency16",
+            "myTiles.tile64",
+            "myTiles.tile23",
+            "myTiles.tile28",
+            "myTiles.tile60",
+            "myTiles.tile17",
+            "myTiles.tile4",
+            "myTiles.tile18"
+        ],
+        "displayName": "Tutorial"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
