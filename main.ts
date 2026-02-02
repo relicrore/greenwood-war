@@ -1099,7 +1099,7 @@ function CreateChapterMenu () {
                 LevelSetup(Lvl)
             })
         } else if (selectedIndex == 1) {
-            Intro()
+            CreateChapterMenu()
         } else if (selectedIndex == 2) {
             CreateCh1Menu()
         } else {
