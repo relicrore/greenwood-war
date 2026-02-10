@@ -19,7 +19,7 @@
         "BARRIER team official font": "github:eugeneredwing8/arcade-barrier-font#e8b58b2873a44a5c0927e2bfd1df8e706b1c94f7",
         "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
         "settings-blocks": "github:microsoft/pxt-settings-blocks#v1.0.0",
-        "Visual-TileMap-Layers": "github:unsignedarduino/visual-tilemap-layers#61b4f4602b416cde3aed546d3f4a6ba1ec05a148",
+        "Visual-TileMap-Layers": "github:unsignedarduino/visual-tilemap-layers#v0.0.1",
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "sprite-scaling": "*",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
