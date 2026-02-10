@@ -56,7 +56,7 @@ function LevelSetup (Level: number) {
         Hailing = false
         SongStopped = false
         Cold_Hearted_Pale_Hail_Forest()
-        timer.after((assets.animation`LevelIntroScreen`.length + 3) * 45, function () {
+        timer.after((assets.animation`LevelIntroScreen`.length + 5) * 45, function () {
             MoveAbility = true
             Hailing = true
         })
@@ -87,7 +87,7 @@ function LevelSetup (Level: number) {
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`PHFm3FG`, 100)
         SongStopped = false
         Cold_Hearted_Pale_Hail_Forest()
-        timer.after((assets.animation`LevelIntroScreen`.length + 3) * 45, function () {
+        timer.after((assets.animation`LevelIntroScreen`.length + 5) * 45, function () {
             MoveAbility = true
             Hailing = true
         })
