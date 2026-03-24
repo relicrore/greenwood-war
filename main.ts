@@ -823,8 +823,29 @@ function PlaySFX (Sound: string) {
         music.play(music.createSoundEffect(WaveShape.Noise, 1731, 1709, 113, 119, 600, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Noise, 1, 5000, 0, 255, 1200, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
     } else if (Sound == "SmallCrash") {
-
-    }
+		music.play(music.createSoundEffect(WaveShape.Sawtooth, 1347, 1, 255, 255, 200, SoundExpressionEffect.Warble, InterpolationCurve.Logarithmic), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Square, 1, 189, 255, 255, 200, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Sine, 1848, 1, 255, 255, 200, SoundExpressionEffect.Warble, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+    } else if (Sound == "ExplodeLarge") {
+		music.play(music.createSoundEffect(WaveShape.Noise, 609, 2410, 255, 255, 1200, SoundExpressionEffect.Warble, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Sine, 266, 2215, 255, 255, 700, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Triangle, 5000, 1, 255, 255, 700, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Noise, 1992, 2772, 255, 255, 700, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Square, 1, 5000, 255, 255, 700, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Noise, 850, 1, 0, 255, 700, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		music.play(music.createSoundEffect(WaveShape.Noise, 850, 1, 0, 255, 700, SoundExpressionEffect.Tremolo, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		timer.after(700, function () {
+    		music.play(music.createSoundEffect(WaveShape.Square, 266, 1, 255, 0, 500, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    		music.play(music.createSoundEffect(WaveShape.Noise, 850, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+   			music.play(music.createSoundEffect(WaveShape.Noise, 850, 1, 255, 0, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    		music.play(music.createSoundEffect(WaveShape.Noise, 256, 135, 255, 0, 650, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    		music.play(music.createSoundEffect(WaveShape.Noise, 256, 135, 255, 0, 650, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    		music.play(music.createSoundEffect(WaveShape.Noise, 256, 135, 255, 0, 650, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+		})
+		timer.after(1200, function () {
+    		music.play(music.createSoundEffect(WaveShape.Noise, 2410, 1, 255, 0, 1200, SoundExpressionEffect.Warble, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+		})
+	}
 }
 scene.onOverlapTile(SpriteKind.EnemyHitbox, assets.tile`NSSpikeUp`, function (sprite, location) {
     if (basics.get_proximity(
