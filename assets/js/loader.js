@@ -58,7 +58,7 @@ function makeCodeRun(options) {
             storedState: simState,
             frameCounter: 1,
             options: {
-                “theme”: {
+                "theme": {
                     "background-color": "#00DDDD",
                     "button-stroke": "#00CCCC",
                     "text-color": "#FFFFFF",
