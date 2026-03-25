@@ -62,8 +62,8 @@ function makeCodeRun(options) {
                     "background-color": "#00DDDD",
                     "button-stroke": "#00CCCC",
                     "text-color": "#FFFFFF",
-                    "button-fill": "#0000AA",
-                    "dpad-fill": "#0000AA"
+                    "button-fill": "#00AAAA",
+                    "dpad-fill": "#00AAAA"
                 },
                 "player": ""
             },
