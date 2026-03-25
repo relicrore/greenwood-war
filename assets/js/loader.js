@@ -58,13 +58,7 @@ function makeCodeRun(options) {
             storedState: simState,
             frameCounter: 1,
             options: {
-                "theme": {
-                    "background-color": "#00DDDD",
-                    "button-stroke": "#00CCCC",
-                    "text-color": "#FFFFFF",
-                    "button-fill": "#00AAAA",
-                    "dpad-fill": "#00AAAA"
-                },
+                "theme": "green",
                 "player": ""
             },
             id: "green-" + Math.random()
