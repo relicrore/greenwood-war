@@ -53,13 +53,6 @@ function LevelSetup (Level: number) {
         scroller.setCameraScrollingMultipliers(0.25, 0, scroller.BackgroundLayer.Layer2)
         tiles.setCurrentTilemap(tilemap`PHFm1`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`PHFm1FG`, 100)
-        Hailing = false
-        SongStopped = false
-        Cold_Hearted_Pale_Hail_Forest()
-        timer.after((assets.animation`LevelIntroScreen`.length + 5) * 45, function () {
-            MoveAbility = true
-            Hailing = true
-        })
     } else if (Level == 1) {
         PineconeNumber = 20
         MISSION = 2
@@ -1613,7 +1606,34 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`FINISHAllDead`, function (spr
 function CUTSCENE () {
     timer.after(30, function () {
         if (MISSION == 1) {
-        	
+        	timer.after(3000, function() {
+                CreateTextSprite()
+                TorrentSayText("<light purple>Tsunami Squad</light purple>, come in.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("<yellow>Platoon A</yellow> of <light purple>Tsunami Squad</light purple>, we read you.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("And this is...?", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("<teal>General Torrent</teal>, <light purple>Tsunami</light purple> commander.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("Copy that.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Anything to report?", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("Negative.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("We just arrived at Winterlock Forest.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Affirmative.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Hold on...", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("Is there a problem?", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Oil troops. They shouldn't be here.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Take them out. Don't leave any behind.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Progress to the big oak afterward.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("Wait for further directions there.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("Understood.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("<teal>Torrent</teal> out.", fancyText.TextSpeed.Fast, 0)
+                timer.after(500, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    Hailing = true
+                    MoveAbility = true
+                    SongStopped = false
+                    Cold_Hearted_Pale_Hail_Forest()
+                })
+            })
         } else if (MISSION == 2) {
             PlayerHitbox.vx = 100
             timer.after(900, function () {
