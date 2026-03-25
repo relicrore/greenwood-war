@@ -59,11 +59,11 @@ function makeCodeRun(options) {
             frameCounter: 1,
             options: {
                 “theme”: {
-                    “background-color”: “#00DDDD”,
-                    “button-stroke”: “#00CCCC”,
-                    “text-color”: “#FFFFFF”,
-                    “button-fill”: “#00AAAA”,
-                    “dpad-fill”: “#00AAAA”
+                    "background-color": "#00DDDD",
+                    "button-stroke": "#00CCCC",
+                    "text-color": "#FFFFFF",
+                    "button-fill": "#0000AA",
+                    "dpad-fill": "#0000AA"
                 },
                 "player": ""
             },
