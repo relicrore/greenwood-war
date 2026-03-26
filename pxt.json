@@ -2,6 +2,7 @@
     "name": "Greenwood War Ch. 1",
     "version": "1.5.5",
     "description": "",
+    "disableTargetTemplateFiles": true,
     "dependencies": {
         "device": "*",
         "arcade-sprite-basics": "github:eugeneredwing8/arcade-sprite-basics#v1.0.1",
