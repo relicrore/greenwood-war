@@ -28,6 +28,11 @@
     "files": [
         "main.blocks",
         "main.ts",
+        "Aquifer.ts",
+        "Enemies.ts",
+        "Levels.ts",
+        "Cutscenes.ts",
+        "Music.ts",
         "README.md",
         "assets.json",
         "images.g.jres",
