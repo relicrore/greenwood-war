@@ -23,7 +23,8 @@
         "Visual-TileMap-Layers": "github:unsignedarduino/visual-tilemap-layers#v0.0.1",
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "sprite-scaling": "*",
-        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
+        "arcade-multi-events": "github:riknoll/arcade-multi-events#764fdc7d175d66740bf5bef4a6aa2dfd40722381"
     },
     "files": [
         "main.blocks",
