@@ -290,13 +290,13 @@ game.onUpdate(function () {
 //Player overlaps
 multiEvents.onOverlapTile(
     multiEvents.spriteKinds(SpriteKind.Player),
-    [
+    multiEvents.tileList(
         assets.tile`PHFSpike`,
         assets.tile`NSSpikeUp`,
         assets.tile`NSSpikeDown`,
         assets.tile`NSSpikeLeft`,
         assets.tile`NSSpikeRight`
-    ],
+    ),
     function(sprite, location) {
     basics.make_sprite_jump(sprite, 190)
     MoveAbility = false
@@ -305,17 +305,6 @@ multiEvents.onOverlapTile(
         MoveAbility = true
         sprite.setKind(SpriteKind.Player)
     })
-    if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
-        sprite.vx = 150
-        timer.after(500, function () {
-            sprite.vx = 0
-        })
-    } else if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingRight))) {
-        sprite.vx = -150
-        timer.after(500, function () {
-            sprite.vx = 0
-        })
-    }
     timer.after(50, function () {
         scene.cameraShake(5, 200)
         PlayerHealth.value += -1
@@ -435,13 +424,13 @@ multiEvents.onOverlapTile(
         SpriteKind.EnemyRHitbox,
         SpriteKind.EnemySrHitbox
     ),
-    [
+    multiEvents.tileList(
         assets.tile`PHFSpike`,
         assets.tile`NSSpikeUp`,
         assets.tile`NSSpikeDown`,
         assets.tile`NSSpikeLeft`,
         assets.tile`NSSpikeRight`
-    ],
+    ),
     function(sprite, location) {
         if (basics.get_proximity(
             sprite,
@@ -453,17 +442,6 @@ multiEvents.onOverlapTile(
                 PlaySFX("DamageEnemy")
             }
             basics.make_sprite_jump(sprite, 190)
-            if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
-                sprite.vx = 150
-                timer.after(500, function () {
-                    sprite.vx = 0
-                })
-            } else if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingRight))) {
-                sprite.vx = -150
-                timer.after(500, function () {
-                    sprite.vx = 0
-                })
-            }
             statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, sprite).value += -1
         } else {
             sprite.setPosition(sprites.readDataNumber(sprite, "SpawnX"), sprites.readDataNumber(sprite, "SpawnY"))
@@ -494,27 +472,17 @@ multiEvents.onOverlap(multiEvents.spriteKinds(SpriteKind.Projectile), multiEvent
 })
 
 //Ally overlaps
-multiEvents.onOverlapTile(multiEvents.spriteKinds(SpriteKind.AllyHitbox),
-    [
+multiEvents.onOverlapTile(
+    multiEvents.spriteKinds(SpriteKind.AllyHitbox),
+    multiEvents.tileList(
         assets.tile`PHFSpike`,
         assets.tile`NSSpikeUp`,
         assets.tile`NSSpikeDown`,
         assets.tile`NSSpikeLeft`,
         assets.tile`NSSpikeRight`
-    ],
+    ),
     function (sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingLeft))) {
-        sprite.vx = 150
-        timer.after(500, function () {
-            sprite.vx = 0
-        })
-    } else if (characterAnimations.matchesRule(sprite, characterAnimations.rule(Predicate.FacingRight))) {
-        sprite.vx = -150
-        timer.after(500, function () {
-            sprite.vx = 0
-        })
-    }
     timer.background(function () {
         pause(600)
     })
