@@ -2,7 +2,6 @@
     "name": "Greenwood War Ch. 1",
     "version": "1.5.5",
     "description": "",
-    "disableTargetTemplateFiles": true,
     "dependencies": {
         "device": "*",
         "arcade-sprite-basics": "github:eugeneredwing8/arcade-sprite-basics#v1.0.1",
@@ -50,7 +49,7 @@
         "branch": "v2.0.56",
         "tag": "v2.0.56",
         "commits": "https://github.com/microsoft/pxt-arcade/commits/2e47d3464cf6ea715ec6e630834bbe15bc2f6feb",
-        "target": "4.0.12",
+        "target": "4.0.14",
         "pxt": "11.3.59",
         "targetId": "arcade"
     },
@@ -58,6 +57,7 @@
         "arcade"
     ],
     "preferredEditor": "tsprj",
+    "disableTargetTemplateFiles": true,
     "palette": [
         "#000000",
         "#FFFFFF",
