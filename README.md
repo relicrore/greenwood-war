@@ -1,26 +1,14 @@
- 
+Open game [relicrore.github.io/greenwood-war](here).
+# PLEASE NOTE:
+Yes, there is an edit button; it only makes a copy of the game for you to edit. You can't push your changes to the actual game itself, but rather to the customized copy.
+# Recent changes
+1. finished tutorial/prologue
+2. added vapor packs (health item)
+3. fixed Beacon level (Chapter 1 Mission 5) animation
+# Upcoming additions/fixes
+1. Fixing spikes so you can move after hitting them
+2. First 6 levels will have less death traps, meaning you won't get stuck in spike pits anymore
+3. Vigor will change from 8 to 12
 
-
-> Open this page at [https://relicrore.github.io/greenwood-war/](https://relicrore.github.io/greenwood-war/)
-
-## Use as Extension
-
-This repository can be added as an **extension** in MakeCode.
-
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/relicrore/greenwood-war** and import
-
-## Edit this project
-
-To edit this repository in MakeCode.
-
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/relicrore/greenwood-war** and click import
-
-#### Metadata (used for search, rendering)
-
-* for PXT/arcade
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+## Chapter 2 will be started once all the above changes are made.
+Ch. 2 is where the story really starts to take place, and it will have a boss battle, so overall it might be better than Ch. 1.
