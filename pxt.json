@@ -26,12 +26,11 @@
         "arcade-multi-events": "github:riknoll/arcade-multi-events#764fdc7d175d66740bf5bef4a6aa2dfd40722381"
     },
     "files": [
-        "assets.json",
         "images.g.jres",
         "images.g.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
-        "main.blocks",
+        "Spritekinds.ts",
         "main.ts",
         "Aquifer.ts",
         "Enemies.ts",
@@ -39,6 +38,7 @@
         "Cutscenes.ts",
         "Music.ts",
         "README.md",
+        "assets.json",
         "main.py",
         "BarrierPalette.ts"
     ],
