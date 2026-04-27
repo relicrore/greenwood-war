@@ -1,22 +1,3 @@
-namespace SpriteKind {
-    export const Pinecone = SpriteKind.create()
-    export const NA = SpriteKind.create()
-    export const PickUp = SpriteKind.create()
-    export const HUD = SpriteKind.create()
-    export const Explode = SpriteKind.create()
-    export const Lightning = SpriteKind.create()
-    export const Ally = SpriteKind.create()
-    export const AllyHitbox = SpriteKind.create()
-    export const EnemyHitbox = SpriteKind.create()
-    export const EnemyRHitbox = SpriteKind.create()
-    export const EnemyPinecone = SpriteKind.create()
-    export const EnemySrHitbox = SpriteKind.create()
-    export const RivalHitbox = SpriteKind.create()
-    export const RivalImage = SpriteKind.create()
-    export const EnemyHitboxCutscene = SpriteKind.create()
-    export const AquiferImage = SpriteKind.create()
-}
-
 //Clear progress
 function CreateClrProgMenu () {
     MenuSprite = miniMenu.createMenu(
