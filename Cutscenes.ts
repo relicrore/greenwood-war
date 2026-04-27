@@ -308,8 +308,16 @@ function CUTSCENE() {
                     Reset()
                     sprites.destroy(SpeechBalloon)
                     tiles.setCurrentTilemap(tilemap`level11`)
-                    CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
-                    color.startFadeFromCurrent(color.originalPalette, 1000)
+                    CreateTextNoSpeech("<wavy>CHAPTER 2: RIVALRY", 120, 120, 1)
+                    color.startFadeFromCurrent(color.originalPalette, 500)
+                    timer.after(1500, function() {
+                        color.startFadeFromCurrent(color.White, 100)
+                        color.pauseUntilFadeDone()
+                        Lvl += 0.5
+                        LevelSetup(Lvl)
+                        sprites.destroy(SpeechBalloon)
+                        color.startFadeFromCurrent(color.originalPalette, 100)
+                    })
                 })
             } else {
 
@@ -531,8 +539,16 @@ function CUTSCENE() {
                     Reset()
                     sprites.destroy(SpeechBalloon)
                     tiles.setCurrentTilemap(tilemap`level11`)
-                    CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
-                    color.startFadeFromCurrent(color.originalPalette, 1000)
+                    CreateTextNoSpeech("<wavy>CHAPTER 2: RIVALRY", 120, 120, 1)
+                    color.startFadeFromCurrent(color.originalPalette, 500)
+                    timer.after(1500, function () {
+                        color.startFadeFromCurrent(color.White, 100)
+                        color.pauseUntilFadeDone()
+                        Lvl += 0.5
+                        LevelSetup(Lvl)
+                        sprites.destroy(SpeechBalloon)
+                        color.startFadeFromCurrent(color.originalPalette, 100)
+                    })
                 })
             } else {
 

@@ -100,8 +100,13 @@ function LevelSetup (Level: number) {
         scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)
         tiles.setCurrentTilemap(tilemap`MAm7`)
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`MAm7FG`, 100)
-    } else {
-    	
+    } else if (Level == 6.5) {
+    	PineconeNumber = 100
+        LvName = "MAGMA ASSAULT:\nMission 1"
+        scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Magma Assault layer 0`)
+        scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)
+        tiles.setCurrentTilemap(tilemap`MAm7`)
+        VisualTileMapLayers.addVisualTileMapLayer(tilemap`MAm7FG`, 100)
     }
     LevelIntro(LvName)
     timer.after((assets.animation`LevelIntroScreen`.length + 3) * 45, function () {
