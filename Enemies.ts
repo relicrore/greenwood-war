@@ -1,16 +1,3 @@
-namespace SpriteKind {
-    //Swordsman
-    export const EnemyHitbox = SpriteKind.create()
-    //Ranger
-    export const EnemyRHitbox = SpriteKind.create()
-    export const EnemyPinecone = SpriteKind.create()
-    //Surging
-    export const EnemySrHitbox = SpriteKind.create()
-    export const RivalHitbox = SpriteKind.create()
-    export const RivalImage = SpriteKind.create()
-    export const EnemyHitboxCutscene = SpriteKind.create()
-}
-
 let RangerPinecone: Sprite = null
 let DieselImage: Sprite = null
 let DieselHitbox: Sprite = null

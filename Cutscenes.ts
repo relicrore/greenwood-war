@@ -7,310 +7,536 @@ let CharBox: Sprite = null
 //Cutscenes
 function CUTSCENE() {
     timer.after(30, function () {
-        if (MISSION == 1) {
-            timer.after(3000, function () {
+        if (!blockSettings.exists("Cutscene" + MISSION + "Played")) {
+            blockSettings.writeNumber("Cutscene" + MISSION + "Played", 0)
+            if (MISSION == 1) {
+                timer.after(3000, function () {
+                    CreateTextSprite()
+                    TorrentSayText("<light purple>Tsunami Squad</light purple>, come in.", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("<yellow>Platoon A</yellow> of <light purple>Tsunami Squad</light purple>, we read you.", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("And this is...?", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("<teal>General Torrent</teal>, <light purple>Tsunami</light purple> commander.", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("Copy that.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Anything to report?", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("Negative.", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("We just arrived at Winterlock Forest.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Affirmative.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Hold on...", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("Is there a problem?", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Oil troops. They shouldn't be here.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Take them out. Don't leave any behind.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Progress to the big oak afterward.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Wait for further directions there.", fancyText.TextSpeed.Fast, 0)
+                    AquiferSayText("Understood.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("<teal>Torrent</teal> out.", fancyText.TextSpeed.Fast, 0)
+                    timer.after(500, function () {
+                        sprites.destroy(SpeechBalloon)
+                        sprites.destroy(CharBox)
+                        HailingPHF = true
+                        MoveAbility = true
+                        SongStopped = false
+                        Cold_Hearted_Pale_Hail_Forest()
+                    })
+                })
+            } else if (MISSION == 2) {
+                PlayerHitbox.vx = 100
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
                 CreateTextSprite()
-                TorrentSayText("<light purple>Tsunami Squad</light purple>, come in.", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("<yellow>Platoon A</yellow> of <light purple>Tsunami Squad</light purple>, we read you.", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("And this is...?", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("<teal>General Torrent</teal>, <light purple>Tsunami</light purple> commander.", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("Copy that.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Anything to report?", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("Negative.", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("We just arrived at Winterlock Forest.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Affirmative.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Hold on...", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("Is there a problem?", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Oil troops. They shouldn't be here.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Take them out. Don't leave any behind.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Progress to the big oak afterward.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("Wait for further directions there.", fancyText.TextSpeed.Fast, 0)
-                AquiferSayText("Understood.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("<teal>Torrent</teal> out.", fancyText.TextSpeed.Fast, 0)
+                AquiferSayText("This section of forest is all clear!", fancyText.TextSpeed.VeryFast, 1)
+                TorrentSayText("Good work... hold on...", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("...", fancyText.TextSpeed.Slow, 0)
+                TorrentSayText("We're picking up an <dark purple>oil</dark purple> signal.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("It's coming from Windbroken Plateau!", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Track it down, and destroy the source!", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("Roger that.", fancyText.TextSpeed.VeryFast, 0)
                 timer.after(500, function () {
                     sprites.destroy(SpeechBalloon)
                     sprites.destroy(CharBox)
-                    Hailing = true
+                    HailingPHF = true
                     MoveAbility = true
                     SongStopped = false
                     Cold_Hearted_Pale_Hail_Forest()
                 })
-            })
-        } else if (MISSION == 2) {
-            PlayerHitbox.vx = 100
-            timer.after(900, function () {
-                PlayerHitbox.fx = 300
-            })
-            CreateTextSprite()
-            AquiferSayText("This section of forest is all clear!", fancyText.TextSpeed.VeryFast, 1)
-            TorrentSayText("Good work... hold on...", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("...", fancyText.TextSpeed.Slow, 0)
-            TorrentSayText("We're picking up an <dark purple>oil</dark purple> signal.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("It's coming from Windbroken Plateau!", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Track it down, and destroy the source!", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("Roger that.", fancyText.TextSpeed.VeryFast, 0)
-            timer.after(500, function () {
-                sprites.destroy(SpeechBalloon)
-                sprites.destroy(CharBox)
-                Hailing = true
-                MoveAbility = true
-                SongStopped = false
-                Cold_Hearted_Pale_Hail_Forest()
-            })
-        } else if (MISSION == 3) {
-            MoveAbility = false
-            Hailing = false
-            CreateTextSprite()
-            AquiferSayText("The path ahead is completely blocked...", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Yes... the <green>GPS</green> is picking up something...", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("An <dark purple>Oil</dark purple> forcefield...", fancyText.TextSpeed.VeryFast, 2)
-            TorrentSayText("They're blocking the path to the signal!!!", fancyText.TextSpeed.VeryFast, 2)
-            TorrentSayText("You need to find some way around it!!!", fancyText.TextSpeed.VeryFast, 2)
-            timer.after(500, function () {
-                sprites.destroy(SpeechBalloon)
-                sprites.destroy(CharBox)
-                basics.make_sprite_jump(PlayerHitbox, 190)
-                timer.after(325, function () {
-                    for (let value5 of sprites.allOfKind(SpriteKind.Ally)) {
-                        value5.z = -11
-                    }
-                    Aquifer.z = -11
-                    color.startFadeFromCurrent(color.Black, 1000)
-                    timer.after(1000, function () {
-                        if (PlayingSingleMission) {
-                            game.reset()
-                        } else {
-                            Lvl += 1
-                            LevelSetup(Lvl)
-                            color.startFadeFromCurrent(color.originalPalette, 200)
+            } else if (MISSION == 3) {
+                MoveAbility = false
+                HailingPHF = false
+                CreateTextSprite()
+                AquiferSayText("The path ahead is completely blocked...", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Yes... the <green>GPS</green> is picking up something...", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("An <dark purple>Oil</dark purple> forcefield...", fancyText.TextSpeed.VeryFast, 2)
+                TorrentSayText("They're blocking the path to the signal!!!", fancyText.TextSpeed.VeryFast, 2)
+                TorrentSayText("You need to find some way around it!!!", fancyText.TextSpeed.VeryFast, 2)
+                timer.after(500, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    basics.make_sprite_jump(PlayerHitbox, 190)
+                    timer.after(325, function () {
+                        for (let value5 of sprites.allOfKind(SpriteKind.Ally)) {
+                            value5.z = -11
                         }
-                    })
-                })
-            })
-        } else if (MISSION == 4) {
-            PlayerHitbox.vx = 100
-            PlayerHitbox.fx = 0
-            timer.after(900, function () {
-                PlayerHitbox.fx = 300
-            })
-            StormyNS = true
-            CreateTextSprite()
-            TorrentSayText("<light purple>Tsunami Squad</light purple>, present?", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("This is <light purple>Tsunami Squad</lightpurple>.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("The signal has expanded on our radar.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("The <green>GPS</green> says you're near the source.", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("What's causing it?", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("It looks like a <red>beacon</red>. A large one...", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Take it out.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("There should be a destruct button somewhere.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Try going as far as possible...", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("And defeat any Oil troops you come across.", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("Understood.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("<teal>Torrent</teal> out.", fancyText.TextSpeed.VeryFast, 0)
-            timer.after(500, function () {
-                sprites.destroy(SpeechBalloon)
-                sprites.destroy(CharBox)
-                MoveAbility = true
-                SongStopped = false
-                Painstricken_Nitro_Stun()
-            })
-        } else if (MISSION == 5) {
-            PlayerHitbox.vx = 100
-            PlayerHitbox.fx = 0
-            timer.after(900, function () {
-                PlayerHitbox.fx = 300
-            })
-            CreateTextSprite()
-            AquiferSayText("We've located the <red>beacon</red>.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Good work. Activate it.", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("Copy that.", fancyText.TextSpeed.VeryFast, 0)
-            basics.make_sprite_jump(PlayerHitbox, 150)
-            PlaySFX("Jump")
-            characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
-            timer.after(100, function () {
-                animation.runImageAnimation(
-                    Aquifer,
-                    assets.animation`Punch Water Right`,
-                    75,
-                    false
-                )
-                PlaySFX("Punch")
-                timer.after(8 * 75, function () {
-                    characterAnimations.setCharacterAnimationsEnabled(Aquifer, true)
-                })
-                timer.after(4 * 75, function () {
-                    PlaySFX("ChargeUp")
-                    timer.after(2000, function () {
-                        scene.cameraShake(6, 30000)
-                        timer.background(function () {
-                            for (let index = 0; index < 25; index++) {
-                                if (!(Silent)) {
-                                    PlaySFX("Rumble")
-                                }
+                        Aquifer.z = -11
+                        color.startFadeFromCurrent(color.Black, 1000)
+                        timer.after(1000, function () {
+                            if (PlayingSingleMission) {
+                                game.reset()
+                            } else {
+                                Lvl += 1
+                                LevelSetup(Lvl)
+                                color.startFadeFromCurrent(color.originalPalette, 200)
                             }
                         })
-                        timer.after(100, function () {
-                            AquiferSayText("<shaky>HOLY-!!!</shaky>", fancyText.TextSpeed.VeryFast, 6)
-                            TorrentSayText("<cyan>AQUIFER</cyan>?! Are you there?! What's going on?!", fancyText.TextSpeed.VeryFast, 0)
-                            AquiferSayText("The entire <wavy>PLATEAU</wavy> is crumbling!!!", fancyText.TextSpeed.VeryFast, 10)
-                            TorrentSayText("Uh... Yes.", fancyText.TextSpeed.VeryFast, 0)
-                            TorrentSayText("It's a DESTRUCT BUTTON, what'd you expect?", fancyText.TextSpeed.VeryFast, 0)
-                            Silent = true
-                            music.stopAllSounds()
-                            PlaySFX("ChargeUpIntense")
-                            sprites.destroy(SpeechBalloon)
-                            sprites.destroy(CharBox)
-                            CreateTextSprite()
-                            AquiferSayText("<shaky>YOU COULD'VE SAID SOMETHING ABOUT THIS!!!</shaky>", fancyText.TextSpeed.VeryFast, 13)
-                            TorrentSayText("IT DOESN'T MATTER, JUST <shaky>RUN!!!</shaky>", fancyText.TextSpeed.VeryFast, 2)
-                            PlayerHitbox.vx = 100
-                            PlayerHitbox.fx = 0
-                            timer.after(5500, function () {
-                                PlayerHitbox.fx = 300
-                                timer.after(500, function () {
-                                    sprites.destroy(SpeechBalloon)
-                                    sprites.destroy(CharBox)
-                                    MoveAbility = true
-                                    SongStopped = false
-                                    StormyNS = true
-                                    ExplosionY = 8
-                                    for (let index = 0; index < 25; index++) {
-                                        Explosion = sprites.create(assets.image`Explosion`, SpriteKind.Explode)
-                                        for (let location3 of tiles.getTilesByType(assets.tile`BeaconButton`)) {
-                                            Explosion.x = location3.x
-                                            Explosion.y = ExplosionY
-                                        }
-                                        Explosion.setFlag(SpriteFlag.GhostThroughWalls, true)
-                                        Explosion.vx = 50
-                                        ExplosionY += 16
+                    })
+                })
+            } else if (MISSION == 4) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
+                StormyNS = true
+                CreateTextSprite()
+                TorrentSayText("<light purple>Tsunami Squad</light purple>, present?", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("This is <light purple>Tsunami Squad</lightpurple>.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("The signal has expanded on our radar.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("The <green>GPS</green> says you're near the source.", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("What's causing it?", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("It looks like a <red>beacon</red>. A large one...", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Take it out.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("There should be a destruct button somewhere.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Try going as far as possible...", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("And defeat any Oil troops you come across.", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("Understood.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("<teal>Torrent</teal> out.", fancyText.TextSpeed.VeryFast, 0)
+                timer.after(500, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    MoveAbility = true
+                    SongStopped = false
+                    Painstricken_Nitro_Stun()
+                })
+            } else if (MISSION == 5) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
+                CreateTextSprite()
+                AquiferSayText("We've located the <red>beacon</red>.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Good work. Activate it.", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("Copy that.", fancyText.TextSpeed.VeryFast, 0)
+                basics.make_sprite_jump(PlayerHitbox, 150)
+                PlaySFX("Jump")
+                characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
+                timer.after(100, function () {
+                    animation.runImageAnimation(
+                        Aquifer,
+                        assets.animation`Punch Water Right`,
+                        75,
+                        false
+                    )
+                    PlaySFX("Punch")
+                    timer.after(8 * 75, function () {
+                        characterAnimations.setCharacterAnimationsEnabled(Aquifer, true)
+                    })
+                    timer.after(4 * 75, function () {
+                        PlaySFX("ChargeUp")
+                        timer.after(2000, function () {
+                            scene.cameraShake(6, 30000)
+                            timer.background(function () {
+                                for (let index = 0; index < 25; index++) {
+                                    if (!(Silent)) {
+                                        PlaySFX("Rumble")
                                     }
-                                    PlaySFX("ExplodeLarge")
-                                    Death_And_Destruction_Beacon()
+                                }
+                            })
+                            timer.after(100, function () {
+                                AquiferSayText("<shaky>HOLY-!!!</shaky>", fancyText.TextSpeed.VeryFast, 6)
+                                TorrentSayText("<cyan>AQUIFER</cyan>?! Are you there?! What's going on?!", fancyText.TextSpeed.VeryFast, 0)
+                                AquiferSayText("The entire <wavy>PLATEAU</wavy> is crumbling!!!", fancyText.TextSpeed.VeryFast, 10)
+                                TorrentSayText("Uh... Yes.", fancyText.TextSpeed.VeryFast, 0)
+                                TorrentSayText("It's a DESTRUCT BUTTON, what'd you expect?", fancyText.TextSpeed.VeryFast, 0)
+                                Silent = true
+                                music.stopAllSounds()
+                                PlaySFX("ChargeUpIntense")
+                                sprites.destroy(SpeechBalloon)
+                                sprites.destroy(CharBox)
+                                CreateTextSprite()
+                                AquiferSayText("<shaky>YOU COULD'VE SAID SOMETHING ABOUT THIS!!!</shaky>", fancyText.TextSpeed.VeryFast, 13)
+                                TorrentSayText("IT DOESN'T MATTER, JUST <shaky>RUN!!!</shaky>", fancyText.TextSpeed.VeryFast, 2)
+                                PlayerHitbox.vx = 100
+                                PlayerHitbox.fx = 0
+                                timer.after(5500, function () {
+                                    PlayerHitbox.fx = 300
+                                    timer.after(500, function () {
+                                        sprites.destroy(SpeechBalloon)
+                                        sprites.destroy(CharBox)
+                                        MoveAbility = true
+                                        SongStopped = false
+                                        StormyNS = true
+                                        ExplosionY = 8
+                                        for (let index = 0; index < 25; index++) {
+                                            Explosion = sprites.create(assets.image`Explosion`, SpriteKind.Explode)
+                                            for (let location3 of tiles.getTilesByType(assets.tile`BeaconButton`)) {
+                                                Explosion.x = location3.x
+                                                Explosion.y = ExplosionY
+                                            }
+                                            Explosion.setFlag(SpriteFlag.GhostThroughWalls, true)
+                                            Explosion.vx = 50
+                                            ExplosionY += 16
+                                        }
+                                        PlaySFX("ExplodeLarge")
+                                        Death_And_Destruction_Beacon()
+                                    })
                                 })
                             })
                         })
                     })
                 })
-            })
-        } else if (MISSION == 6) {
-            PlayerHitbox.vx = 100
-            PlayerHitbox.fx = 0
-            timer.after(450, function () {
-                PlayerHitbox.fx = 300
-            })
-            CreateTextSprite()
-            AquiferSayText("The <red>beacon</red> has been destroyed!", fancyText.TextSpeed.VeryFast, 1)
-            TorrentSayText("Alright.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Then your mission is complete.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Return to home base.", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("Affirmative.", fancyText.TextSpeed.VeryFast, 0)
-            CreateDiesel()
-            tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(0, 16))
-            DieselHitbox.vx = 200
-            PlaySFX("Zoom")
-            timer.after(200, function () {
-                DieselHitbox.fx = 300
-                AquiferSayText("<shaky><dark purple>DIESEL</dark purple>!?!?<shaky>", fancyText.TextSpeed.VeryFast, 10)
-                timer.after(800, function () {
-                    characterAnimations.setCharacterState(DieselImage, characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving))
+            } else if (MISSION == 6) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(450, function () {
+                    PlayerHitbox.fx = 300
                 })
-                DieselSayText("<wavy><cyan>AQUIFER</cyan>.</wavy>", fancyText.TextSpeed.VeryFast, 9)
-                AquiferSayText("<shaky>WHAT ARE YOU DOING HERE!?!?!?<shaky>", fancyText.TextSpeed.VeryFast, 13)
-                DieselSayText("I'm looking for something...", fancyText.TextSpeed.VeryFast, 0)
-                DieselSayText("Something called <shaky>revenge</shaky>.", fancyText.TextSpeed.VeryFast, 2)
-                DieselSayText("You have caused too much damage...", fancyText.TextSpeed.VeryFast, 4)
-                DieselSayText("And you <shaky>will</shaky> pay for it!", fancyText.TextSpeed.VeryFast, 9)
-                timer.after(800, function () {
-                    characterAnimations.clearCharacterState(DieselImage)
-                    DieselHitbox.vx = 100
-                    DieselHitbox.fx = 0
-                    timer.after(1200, function () {
-                        SongStopped = true
-                        AquiferSayText("<teal>Torrent</teal>, <green>GPS</green>! <shaky>NOW!!!</shaky>", fancyText.TextSpeed.VeryFast, 2)
-                        TorrentSayText("I'm tracking him...", fancyText.TextSpeed.VeryFast, 2)
-                        AquiferSayText("Come <shaky>ON!!!</shaky>", fancyText.TextSpeed.Slow, 2)
-                        TorrentSayText("Almost...", fancyText.TextSpeed.Slow, 2)
-                        TorrentSayText("Ah, got him!", fancyText.TextSpeed.VeryFast, 1)
-                        TorrentSayText("Fury Peak! <shaky>AS FAST AS POSSIBLE!</shaky>", fancyText.TextSpeed.VeryFast, 2)
-                        AquiferSayText("Copy that! <shaky>EVERYONE, AFTER HIM!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
-                        SwapSong()
-                        timer.after(1000, function () {
-                            characterAnimations.clearCharacterState(Aquifer)
-                            sprites.destroy(DieselHitbox)
-                            sprites.destroy(DieselImage)
-                            sprites.destroy(SpeechBalloon)
-                            sprites.destroy(CharBox)
-                            MoveAbility = true
-                            SongStopped = false
-                            StormyNS = true
-                            Painstricken_Nitro_Stun()
+                CreateTextSprite()
+                AquiferSayText("The <red>beacon</red> has been destroyed!", fancyText.TextSpeed.VeryFast, 1)
+                TorrentSayText("Alright.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Then your mission is complete.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Return to home base.", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("Affirmative.", fancyText.TextSpeed.VeryFast, 0)
+                CreateDiesel()
+                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(0, 16))
+                DieselHitbox.vx = 200
+                PlaySFX("Zoom")
+                timer.after(200, function () {
+                    DieselHitbox.fx = 300
+                    AquiferSayText("<shaky><dark purple>DIESEL</dark purple>!?!?<shaky>", fancyText.TextSpeed.VeryFast, 10)
+                    timer.after(800, function () {
+                        characterAnimations.setCharacterState(DieselImage, characterAnimations.rule(Predicate.FacingLeft, Predicate.NotMoving))
+                    })
+                    DieselSayText("<wavy><cyan>AQUIFER</cyan>.</wavy>", fancyText.TextSpeed.VeryFast, 9)
+                    AquiferSayText("<shaky>WHAT ARE YOU DOING HERE!?!?!?<shaky>", fancyText.TextSpeed.VeryFast, 13)
+                    DieselSayText("I'm looking for something...", fancyText.TextSpeed.VeryFast, 0)
+                    DieselSayText("Something called <shaky>revenge</shaky>.", fancyText.TextSpeed.VeryFast, 2)
+                    DieselSayText("You have caused too much damage...", fancyText.TextSpeed.VeryFast, 4)
+                    DieselSayText("And you <shaky>will</shaky> pay for it!", fancyText.TextSpeed.VeryFast, 9)
+                    timer.after(800, function () {
+                        characterAnimations.clearCharacterState(DieselImage)
+                        DieselHitbox.vx = 100
+                        DieselHitbox.fx = 0
+                        timer.after(1200, function () {
+                            SongStopped = true
+                            AquiferSayText("<teal>Torrent</teal>, <green>GPS</green>! <shaky>NOW!!!</shaky>", fancyText.TextSpeed.VeryFast, 2)
+                            TorrentSayText("I'm tracking him...", fancyText.TextSpeed.VeryFast, 2)
+                            AquiferSayText("Come <shaky>ON!!!</shaky>", fancyText.TextSpeed.Slow, 2)
+                            TorrentSayText("Almost...", fancyText.TextSpeed.Slow, 2)
+                            TorrentSayText("Ah, got him!", fancyText.TextSpeed.VeryFast, 1)
+                            TorrentSayText("Fury Peak! <shaky>AS FAST AS POSSIBLE!</shaky>", fancyText.TextSpeed.VeryFast, 2)
+                            AquiferSayText("Copy that! <shaky>EVERYONE, AFTER HIM!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
+                            SwapSong()
+                            timer.after(1000, function () {
+                                characterAnimations.clearCharacterState(Aquifer)
+                                sprites.destroy(DieselHitbox)
+                                sprites.destroy(DieselImage)
+                                sprites.destroy(SpeechBalloon)
+                                sprites.destroy(CharBox)
+                                MoveAbility = true
+                                SongStopped = false
+                                StormyNS = true
+                                Painstricken_Nitro_Stun()
+                            })
                         })
                     })
                 })
-            })
-        } else if (MISSION == 7) {
-            PlayerHitbox.vx = 100
-            PlayerHitbox.fx = 0
-            timer.after(250, function () {
-                PlayerHitbox.fx = 300
-            })
-            CreateTextSprite()
-            AquiferSayText("Torrent, we've arrived at Fury Peak.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Any sign of <dark purple>Diesel</dark purple>?", fancyText.TextSpeed.VeryFast, 0)
-            AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
-            TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
-            CreateDiesel()
-            tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
-            basics.make_sprite_jump(DieselHitbox, 190)
-            PlaySFX("Jump")
-            SongStopped = false
-            Enemy_Encounter_Diesels_Theme()
-            timer.after(500, function () {
-                DieselHitbox.vx = -100
-                DieselHitbox.fx = 100
-                AquiferSayText("<teal>Torrent</teal>! We've found him!", fancyText.TextSpeed.VeryFast, 2)
-                DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
-                AquiferSayText("You're outnumbered!", fancyText.TextSpeed.VeryFast, 4)
-                TorrentSayText("No... He's not.", fancyText.TextSpeed.VeryFast, 0)
-                TorrentSayText("The <green>GPS</green> picked up many threats nearby...", fancyText.TextSpeed.VeryFast, 1)
-                DieselSayText("That's right...", fancyText.TextSpeed.VeryFast, 4)
-                DieselSayText("So now you can see who's REALLY outnumbered!", fancyText.TextSpeed.VeryFast, 9)
-                DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
-                for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
-                    OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
-                    sprites.setDataNumber(OilHitbox, "SpawnX", value6.x)
-                    sprites.setDataNumber(OilHitbox, "SpawnY", value6.y)
-                    OilHitbox.setFlag(SpriteFlag.Invisible, true)
-                    OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-                    sprites.setDataSprite(OilHitbox, "image", OilNPC)
-                    OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-                    tiles.placeOnTile(OilHitbox, value6)
-                    tiles.setTileAt(value6, assets.tile`MAStone`)
-                    basics.add_gravity_to(OilHitbox)
-                    OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-                    OilHealth.setColor(12, 15)
-                    OilHealth.setBarBorder(1, 15)
-                    OilHealth.max = 2
-                    OilHealth.attachToSprite(OilHitbox)
-                    basics.make_sprite_jump(OilHitbox, 190)
-                    OilHitbox.vx = -100
-                    OilHitbox.fx = 300
-                    timer.after(500, function () {
-                        tiles.setWallAt(value6, true)
-                    })
-                }
-                OilAnims()
-                color.startFadeFromCurrent(color.Black, 3500)
-                DieselSayText("HAHAHAH!!! GOOD LUCK, <shaky><cyan>AQUIFER</cyan>!!!</shaky>", fancyText.TextSpeed.VeryFast, 17)
-                color.pauseUntilFadeDone()
-                Reset()
-                sprites.destroy(SpeechBalloon)
-                tiles.setCurrentTilemap(tilemap`level11`)
-                CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
-                color.startFadeFromCurrent(color.originalPalette, 1000)
-            })
-        } else {
+            } else if (MISSION == 7) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(250, function () {
+                    PlayerHitbox.fx = 300
+                })
+                CreateTextSprite()
+                AquiferSayText("Torrent, we've arrived at Fury Peak.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Any sign of <dark purple>Diesel</dark purple>?", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
+                CreateDiesel()
+                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
+                basics.make_sprite_jump(DieselHitbox, 190)
+                PlaySFX("Jump")
+                SongStopped = false
+                Enemy_Encounter_Diesels_Theme()
+                timer.after(500, function () {
+                    DieselHitbox.vx = -100
+                    DieselHitbox.fx = 100
+                    AquiferSayText("<teal>Torrent</teal>! We've found him!", fancyText.TextSpeed.VeryFast, 2)
+                    DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
+                    AquiferSayText("You're outnumbered!", fancyText.TextSpeed.VeryFast, 4)
+                    TorrentSayText("No... He's not.", fancyText.TextSpeed.VeryFast, 0)
+                    TorrentSayText("The <green>GPS</green> picked up many threats nearby...", fancyText.TextSpeed.VeryFast, 1)
+                    DieselSayText("That's right...", fancyText.TextSpeed.VeryFast, 4)
+                    DieselSayText("So now you can see who's REALLY outnumbered!", fancyText.TextSpeed.VeryFast, 9)
+                    DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
+                    for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
+                        OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
+                        sprites.setDataNumber(OilHitbox, "SpawnX", value6.x)
+                        sprites.setDataNumber(OilHitbox, "SpawnY", value6.y)
+                        OilHitbox.setFlag(SpriteFlag.Invisible, true)
+                        OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+                        sprites.setDataSprite(OilHitbox, "image", OilNPC)
+                        OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                        tiles.placeOnTile(OilHitbox, value6)
+                        tiles.setTileAt(value6, assets.tile`MAStone`)
+                        basics.add_gravity_to(OilHitbox)
+                        OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+                        OilHealth.setColor(12, 15)
+                        OilHealth.setBarBorder(1, 15)
+                        OilHealth.max = 2
+                        OilHealth.attachToSprite(OilHitbox)
+                        basics.make_sprite_jump(OilHitbox, 190)
+                        OilHitbox.vx = -100
+                        OilHitbox.fx = 300
+                        timer.after(500, function () {
+                            tiles.setWallAt(value6, true)
+                        })
+                    }
+                    OilAnims()
+                    color.startFadeFromCurrent(color.Black, 3500)
+                    DieselSayText("HAHAHAH!!! GOOD LUCK, <shaky><cyan>AQUIFER</cyan>!!!</shaky>", fancyText.TextSpeed.VeryFast, 17)
+                    color.pauseUntilFadeDone()
+                    Reset()
+                    sprites.destroy(SpeechBalloon)
+                    tiles.setCurrentTilemap(tilemap`level11`)
+                    CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
+                    color.startFadeFromCurrent(color.originalPalette, 1000)
+                })
+            } else {
 
+            }
+        } else {
+            if (MISSION == 1) {
+                timer.after(100, function () {
+                    CreateTextSprite()
+                    TorrentSayText("Oil troops. They shouldn't be here.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Take them out. Don't leave any behind.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Progress to the big oak afterward.", fancyText.TextSpeed.Fast, 0)
+                    TorrentSayText("Wait for further directions there.", fancyText.TextSpeed.Fast, 0)
+                    timer.after(100, function () {
+                        sprites.destroy(SpeechBalloon)
+                        sprites.destroy(CharBox)
+                        HailingPHF = true
+                        MoveAbility = true
+                        SongStopped = false
+                        Cold_Hearted_Pale_Hail_Forest()
+                    })
+                })
+            } else if (MISSION == 2) {
+                PlayerHitbox.vx = 100
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
+                CreateTextSprite()
+                TorrentSayText("We're picking up an <dark purple>oil</dark purple> signal.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Track it down, and destroy the source!", fancyText.TextSpeed.VeryFast, 0)
+                timer.after(100, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    HailingPHF = true
+                    MoveAbility = true
+                    SongStopped = false
+                    Cold_Hearted_Pale_Hail_Forest()
+                })
+            } else if (MISSION == 3) {
+                MoveAbility = false
+                HailingPHF = false
+                CreateTextSprite()
+                TorrentSayText("They're blocking the path to the signal!!!", fancyText.TextSpeed.VeryFast, 2)
+                TorrentSayText("You need to find some way around it!!!", fancyText.TextSpeed.VeryFast, 2)
+                timer.after(100, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    basics.make_sprite_jump(PlayerHitbox, 190)
+                    timer.after(325, function () {
+                        for (let value5 of sprites.allOfKind(SpriteKind.Ally)) {
+                            value5.z = -11
+                        }
+                        Aquifer.z = -11
+                        color.startFadeFromCurrent(color.Black, 1000)
+                        timer.after(1000, function () {
+                            if (PlayingSingleMission) {
+                                game.reset()
+                            } else {
+                                Lvl += 1
+                                LevelSetup(Lvl)
+                                color.startFadeFromCurrent(color.originalPalette, 200)
+                            }
+                        })
+                    })
+                })
+            } else if (MISSION == 4) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
+                StormyNS = true
+                CreateTextSprite()
+                TorrentSayText("There should be a destruct button somewhere.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Defeat any Oil troops you come across.", fancyText.TextSpeed.VeryFast, 0)
+                timer.after(100, function () {
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    MoveAbility = true
+                    SongStopped = false
+                    Painstricken_Nitro_Stun()
+                })
+            } else if (MISSION == 5) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(900, function () {
+                    PlayerHitbox.fx = 300
+                })
+                basics.make_sprite_jump(PlayerHitbox, 150)
+                PlaySFX("Jump")
+                characterAnimations.setCharacterAnimationsEnabled(Aquifer, false)
+                timer.after(100, function () {
+                    animation.runImageAnimation(
+                        Aquifer,
+                        assets.animation`Punch Water Right`,
+                        75,
+                        false
+                    )
+                    PlaySFX("Punch")
+                    timer.after(8 * 75, function () {
+                        characterAnimations.setCharacterAnimationsEnabled(Aquifer, true)
+                    })
+                    timer.after(4 * 75, function () {
+                        PlaySFX("ChargeUp")
+                        timer.after(2000, function () {
+                            scene.cameraShake(6, 30000)
+                            timer.background(function () {
+                                for (let index = 0; index < 25; index++) {
+                                    if (!(Silent)) {
+                                        PlaySFX("Rumble")
+                                    }
+                                }
+                            })
+                            timer.after(100, function () {
+                                Silent = true
+                                music.stopAllSounds()
+                                PlaySFX("ChargeUpIntense")
+                                PlayerHitbox.vx = 100
+                                PlayerHitbox.fx = 0
+                                timer.after(5500, function () {
+                                    PlayerHitbox.fx = 300
+                                    timer.after(500, function () {
+                                        MoveAbility = true
+                                        SongStopped = false
+                                        StormyNS = true
+                                        ExplosionY = 8
+                                        for (let index = 0; index < 25; index++) {
+                                            Explosion = sprites.create(assets.image`Explosion`, SpriteKind.Explode)
+                                            for (let location3 of tiles.getTilesByType(assets.tile`BeaconButton`)) {
+                                                Explosion.x = location3.x
+                                                Explosion.y = ExplosionY
+                                            }
+                                            Explosion.setFlag(SpriteFlag.GhostThroughWalls, true)
+                                            Explosion.vx = 50
+                                            ExplosionY += 16
+                                        }
+                                        PlaySFX("ExplodeLarge")
+                                        Death_And_Destruction_Beacon()
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            } else if (MISSION == 6) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(450, function () {
+                    PlayerHitbox.fx = 300
+                })
+                TorrentSayText("Fury Peak! <shaky>AS FAST AS POSSIBLE!</shaky>", fancyText.TextSpeed.VeryFast, 2)
+                AquiferSayText("Copy that! <shaky>EVERYONE, AFTER HIM!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
+                SwapSong()
+                timer.after(1000, function () {
+                    characterAnimations.clearCharacterState(Aquifer)
+                    sprites.destroy(DieselHitbox)
+                    sprites.destroy(DieselImage)
+                    sprites.destroy(SpeechBalloon)
+                    sprites.destroy(CharBox)
+                    MoveAbility = true
+                    SongStopped = false
+                    StormyNS = true
+                    Painstricken_Nitro_Stun()
+                })
+            } else if (MISSION == 7) {
+                PlayerHitbox.vx = 100
+                PlayerHitbox.fx = 0
+                timer.after(250, function () {
+                    PlayerHitbox.fx = 300
+                })
+                CreateTextSprite()
+                AquiferSayText("Torrent, we've arrived at Fury Peak.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Any sign of <dark purple>Diesel</dark purple>?", fancyText.TextSpeed.VeryFast, 0)
+                AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
+                TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
+                CreateDiesel()
+                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
+                basics.make_sprite_jump(DieselHitbox, 190)
+                PlaySFX("Jump")
+                SongStopped = false
+                Enemy_Encounter_Diesels_Theme()
+                timer.after(500, function () {
+                    DieselHitbox.vx = -100
+                    DieselHitbox.fx = 100
+                    AquiferSayText("<teal>Torrent</teal>! We've found him!", fancyText.TextSpeed.VeryFast, 2)
+                    DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
+                    AquiferSayText("You're outnumbered!", fancyText.TextSpeed.VeryFast, 4)
+                    TorrentSayText("No... He's not.", fancyText.TextSpeed.VeryFast, 0)
+                    TorrentSayText("The <green>GPS</green> picked up many threats nearby...", fancyText.TextSpeed.VeryFast, 1)
+                    DieselSayText("That's right...", fancyText.TextSpeed.VeryFast, 4)
+                    DieselSayText("So now you can see who's REALLY outnumbered!", fancyText.TextSpeed.VeryFast, 9)
+                    DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
+                    for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
+                        OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
+                        sprites.setDataNumber(OilHitbox, "SpawnX", value6.x)
+                        sprites.setDataNumber(OilHitbox, "SpawnY", value6.y)
+                        OilHitbox.setFlag(SpriteFlag.Invisible, true)
+                        OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
+                        sprites.setDataSprite(OilHitbox, "image", OilNPC)
+                        OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
+                        tiles.placeOnTile(OilHitbox, value6)
+                        tiles.setTileAt(value6, assets.tile`MAStone`)
+                        basics.add_gravity_to(OilHitbox)
+                        OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
+                        OilHealth.setColor(12, 15)
+                        OilHealth.setBarBorder(1, 15)
+                        OilHealth.max = 2
+                        OilHealth.attachToSprite(OilHitbox)
+                        basics.make_sprite_jump(OilHitbox, 190)
+                        OilHitbox.vx = -100
+                        OilHitbox.fx = 300
+                        timer.after(500, function () {
+                            tiles.setWallAt(value6, true)
+                        })
+                    }
+                    OilAnims()
+                    color.startFadeFromCurrent(color.Black, 3500)
+                    DieselSayText("HAHAHAH!!! GOOD LUCK, <shaky><cyan>AQUIFER</cyan>!!!</shaky>", fancyText.TextSpeed.VeryFast, 17)
+                    color.pauseUntilFadeDone()
+                    Reset()
+                    sprites.destroy(SpeechBalloon)
+                    tiles.setCurrentTilemap(tilemap`level11`)
+                    CreateTextNoSpeech("<wavy>CHAPTER 2 COMING SOON", 120, 120, 1)
+                    color.startFadeFromCurrent(color.originalPalette, 1000)
+                })
+            } else {
+
+            }
         }
     })
 }

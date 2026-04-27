@@ -1,6 +1,4 @@
-namespace SpriteKind {
-    export const AquiferImage = SpriteKind.create()
-}
+
 
 let ScreenImage: Image = null
 let SpriteImage: Sprite = null

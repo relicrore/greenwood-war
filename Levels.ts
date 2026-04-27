@@ -14,7 +14,7 @@ let OilNum = 0
 let PlayingSingleMission = false
 let LvIntro: Sprite = null
 let WeaponHolding = 0
-let Hailing = false
+let HailingPHF = false
 let MISSION = 0
 let KILLS = 0
 let PineconeNumber = 0
@@ -67,7 +67,7 @@ function LevelSetup (Level: number) {
         Cold_Hearted_Pale_Hail_Forest()
         timer.after((assets.animation`LevelIntroScreen`.length + 5) * 45, function () {
             MoveAbility = true
-            Hailing = true
+            HailingPHF = true
         })
     } else if (Level == 3) {
         PineconeNumber = 20
@@ -198,7 +198,7 @@ function Reset() {
     // ONLY USE -10 LAYERS FOR CUTSCENES
     VisualTileMapLayers.deleteVisualTileMapLayers(-10)
     VisualTileMapLayers.deleteVisualTileMapLayers(100)
-    Hailing = false
+    HailingPHF = false
     StormyNS = false
     MoveAbility = false
     Silent = false
@@ -299,10 +299,8 @@ multiEvents.onOverlapTile(
     ),
     function(sprite, location) {
     basics.make_sprite_jump(sprite, 190)
-    MoveAbility = false
     sprite.setKind(SpriteKind.NA)
     timer.after(500, function () {
-        MoveAbility = true
         sprite.setKind(SpriteKind.Player)
     })
     timer.after(50, function () {
@@ -563,7 +561,7 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite, location) {
 })
 
 game.onUpdateInterval(randint(1000, 3500), function () {
-    if (Hailing) {
+    if (HailingPHF) {
         for (let index = 0; index < randint(1, 5); index++) {
             Hail = sprites.createProjectileFromSide(assets.image`Hail`, 0, 45)
             Hail.scale = 0.5
