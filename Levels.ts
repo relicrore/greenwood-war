@@ -5,6 +5,8 @@ let HudSprite: Sprite = null
 let WeaponUI: Sprite = null
 let PineconeCounter: fancyText.TextSprite = null
 let VIGORtext: fancyText.TextSprite = null
+let RADtext: fancyText.TextSprite = null
+let RADlevel: StatusBarSprite = null
 let Prologue: Sprite = null
 let LV = 0
 let Explosion: Sprite = null
@@ -21,6 +23,7 @@ let PineconeNumber = 0
 let SwordHitsLeft = 0
 let Lvl = 0
 let LvName = ""
+let RadiationBar = false
 
 //Levels
 function LevelSetup (Level: number) {
@@ -95,14 +98,6 @@ function LevelSetup (Level: number) {
     } else if (Level == 6) {
         PineconeNumber = 20
         MISSION = 7
-        LvName = "MAGMA ASSAULT:\nMission 1"
-        scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Magma Assault layer 0`)
-        scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)
-        tiles.setCurrentTilemap(tilemap`MAm7`)
-        VisualTileMapLayers.addVisualTileMapLayer(tilemap`MAm7FG`, 100)
-    } else if (Level == 6.5) {
-    	PineconeNumber = 100
-        MISSION = 7.5
         LvName = "MAGMA ASSAULT:\nMission 1"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Magma Assault layer 0`)
         scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)
@@ -243,17 +238,39 @@ function SetUpOilNum() {
 
 //Heads-up display
 function SetUpHUD() {
-    PlayerHealth = statusbars.create(60, 8, StatusBarKind.Health)
+    if (RadiationBar) {
+        PlayerHealth = statusbars.create(60, 4, StatusBarKind.Health)
+        PlayerHealth.left = 15
+        PlayerHealth.top = 1
+        VIGORtext = fancyText.create("VGR", 0, 11, customFont.BARRIER_font_small)
+        VIGORtext.left = 2
+        VIGORtext.top = 1
+        RADlevel = statusbars.create(60, 4, StatusBarKind.Health)
+        RADlevel.left = 15
+        RADlevel.top = 6
+        RADlevel.z = 1000
+        RADlevel.max = 8
+        RADlevel.setColor(7, 10)
+        RADlevel.setBarBorder(1, 11)
+        RADtext = fancyText.create("RAD", 0, 11, customFont.BARRIER_font_small)
+        RADtext.left = 2
+        RADtext.top = 6
+        RADtext.setKind(SpriteKind.Text)
+        RADtext.setFlag(SpriteFlag.RelativeToCamera, true)
+        RADtext.z = 1000
+    } else {
+        PlayerHealth = statusbars.create(60, 8, StatusBarKind.Health)
+        PlayerHealth.left = 35
+        PlayerHealth.top = 5
+        VIGORtext = fancyText.create("VIGOR", 0, 11, customFont.BARRIER_font)
+        VIGORtext.left = 2
+        VIGORtext.top = 2
+    }
     PlayerHealth.z = 1000
     PlayerHealth.max = 8
     PlayerHealth.setColor(9, 8)
     PlayerHealth.setBarBorder(1, 11)
-    PlayerHealth.left = 35
-    PlayerHealth.top = 5
-    VIGORtext = fancyText.create("VIGOR", 0, 11, customFont.BARRIER_font)
     VIGORtext.setKind(SpriteKind.Text)
-    VIGORtext.left = 2
-    VIGORtext.top = 2
     VIGORtext.setFlag(SpriteFlag.RelativeToCamera, true)
     VIGORtext.z = 1000
     PineconeCounter = fancyText.create("x" + "100", 0, 11, customFont.BARRIER_font)

@@ -314,13 +314,20 @@ function CUTSCENE() {
                         color.startFadeFromCurrent(color.White, 100)
                         color.pauseUntilFadeDone()
                         sprites.destroy(SpeechBalloon)
-                        Lvl += 0.5
                         LevelSetup(Lvl)
                         color.startFadeFromCurrent(color.originalPalette, 100)
                     })
                 })
-            } else {
-
+            } else if (MISSION == 7.5) {
+                CreateTextSprite()
+                AquiferSayText("<teal>Torrent</teal>, is there anything we should have while we're here?", fancyText.TextSpeed.Fast, 2)
+                TorrentSayText("Yes. The volcano gives off a lot of radiation.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("I've updated your <yellow>Monitor</yellow> so you can see your radiation level.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("There are Radiation Packs around the volcano. They'll heal you.", fancyText.TextSpeed.Fast, 0)
+                RadiationBar = true
+                sprites.destroy(SpeechBalloon)
+                sprites.destroy(CharBox)
+                MoveAbility = true
             }
         } else {
             if (MISSION == 1) {
@@ -481,67 +488,20 @@ function CUTSCENE() {
                     StormyNS = true
                     Painstricken_Nitro_Stun()
                 })
+        
             } else if (MISSION == 7) {
-                PlayerHitbox.vx = 100
-                PlayerHitbox.fx = 0
-                timer.after(250, function () {
-                    PlayerHitbox.fx = 300
-                })
-                CreateDiesel()
-                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 43))
-                basics.make_sprite_jump(DieselHitbox, 190)
-                PlaySFX("Jump")
+                CreateTextSprite()
+                TorrentSayText("I've updated your <yellow>Monitor</yellow>.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("The volcano gives off a lot of radiation.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("You should be able to see your radiation level.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("There are Radiation Packs around the volcano.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("They'll heal you.", fancyText.TextSpeed.Fast, 0)
+                RadiationBar = true
+                sprites.destroy(SpeechBalloon)
+                sprites.destroy(CharBox)
+                MoveAbility = true
                 SongStopped = false
-                Enemy_Encounter_Diesels_Theme()
-                timer.after(500, function () {
-                    DieselHitbox.vx = -100
-                    DieselHitbox.fx = 100
-                    CreateTextSprite()
-                    DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
-                    DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
-                    for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
-                        OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
-                        sprites.setDataNumber(OilHitbox, "SpawnX", value6.x)
-                        sprites.setDataNumber(OilHitbox, "SpawnY", value6.y)
-                        OilHitbox.setFlag(SpriteFlag.Invisible, true)
-                        OilNPC = sprites.create(assets.image`OilHitbox`, SpriteKind.Enemy)
-                        sprites.setDataSprite(OilHitbox, "image", OilNPC)
-                        OilNPC.setFlag(SpriteFlag.GhostThroughWalls, true)
-                        tiles.placeOnTile(OilHitbox, value6)
-                        tiles.setTileAt(value6, assets.tile`MAStone`)
-                        basics.add_gravity_to(OilHitbox)
-                        OilHealth = statusbars.create(15, 4, StatusBarKind.EnemyHealth)
-                        OilHealth.setColor(12, 15)
-                        OilHealth.setBarBorder(1, 15)
-                        OilHealth.max = 2
-                        OilHealth.attachToSprite(OilHitbox)
-                        basics.make_sprite_jump(OilHitbox, 190)
-                        OilHitbox.vx = -100
-                        OilHitbox.fx = 300
-                        timer.after(500, function () {
-                            tiles.setWallAt(value6, true)
-                        })
-                    }
-                    OilAnims()
-                    color.startFadeFromCurrent(color.Black, 3500)
-                    DieselSayText("HAHAHAH!!! GOOD LUCK, <shaky><cyan>AQUIFER</cyan>!!!</shaky>", fancyText.TextSpeed.VeryFast, 17)
-                    color.pauseUntilFadeDone()
-                    Reset()
-                    sprites.destroy(SpeechBalloon)
-                    tiles.setCurrentTilemap(tilemap`level11`)
-                    CreateTextNoSpeech("<wavy>CHAPTER 2: RIVALRY", 120, 120, 1)
-                    color.startFadeFromCurrent(color.originalPalette, 500)
-                    timer.after(1500, function () {
-                        color.startFadeFromCurrent(color.White, 100)
-                        color.pauseUntilFadeDone()
-                        sprites.destroy(SpeechBalloon)
-                        Lvl += 0.5
-                        LevelSetup(Lvl)
-                        color.startFadeFromCurrent(color.originalPalette, 100)
-                    })
-                })
-            } else {
-
+                Burning_Fury_Magma_Assault()
             }
         }
     })
