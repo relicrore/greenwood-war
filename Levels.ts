@@ -102,6 +102,7 @@ function LevelSetup (Level: number) {
         VisualTileMapLayers.addVisualTileMapLayer(tilemap`MAm7FG`, 100)
     } else if (Level == 6.5) {
     	PineconeNumber = 100
+        MISSION = 7.5
         LvName = "MAGMA ASSAULT:\nMission 1"
         scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`Magma Assault layer 0`)
         scroller.setCameraScrollingMultipliers(0.2, 0, scroller.BackgroundLayer.Layer0)

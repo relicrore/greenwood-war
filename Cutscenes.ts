@@ -262,7 +262,7 @@ function CUTSCENE() {
                 AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
                 TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
                 CreateDiesel()
-                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
+                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 43))
                 basics.make_sprite_jump(DieselHitbox, 190)
                 PlaySFX("Jump")
                 SongStopped = false
@@ -313,9 +313,9 @@ function CUTSCENE() {
                     timer.after(1500, function() {
                         color.startFadeFromCurrent(color.White, 100)
                         color.pauseUntilFadeDone()
+                        sprites.destroy(SpeechBalloon)
                         Lvl += 0.5
                         LevelSetup(Lvl)
-                        sprites.destroy(SpeechBalloon)
                         color.startFadeFromCurrent(color.originalPalette, 100)
                     })
                 })
@@ -487,13 +487,8 @@ function CUTSCENE() {
                 timer.after(250, function () {
                     PlayerHitbox.fx = 300
                 })
-                CreateTextSprite()
-                AquiferSayText("Torrent, we've arrived at Fury Peak.", fancyText.TextSpeed.VeryFast, 0)
-                TorrentSayText("Any sign of <dark purple>Diesel</dark purple>?", fancyText.TextSpeed.VeryFast, 0)
-                AquiferSayText("No, we've lost him.", fancyText.TextSpeed.VeryFast, 0)
-                TorrentSayText("Hmm... Scout around; see if you can find h-", fancyText.TextSpeed.VeryFast, 0)
                 CreateDiesel()
-                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 11))
+                tiles.placeOnTile(DieselHitbox, tiles.getTileLocation(8, 43))
                 basics.make_sprite_jump(DieselHitbox, 190)
                 PlaySFX("Jump")
                 SongStopped = false
@@ -501,13 +496,8 @@ function CUTSCENE() {
                 timer.after(500, function () {
                     DieselHitbox.vx = -100
                     DieselHitbox.fx = 100
-                    AquiferSayText("<teal>Torrent</teal>! We've found him!", fancyText.TextSpeed.VeryFast, 2)
+                    CreateTextSprite()
                     DieselSayText("<shaky>IDIOT!!</shaky> I knew you'd follow me!", fancyText.TextSpeed.VeryFast, 9)
-                    AquiferSayText("You're outnumbered!", fancyText.TextSpeed.VeryFast, 4)
-                    TorrentSayText("No... He's not.", fancyText.TextSpeed.VeryFast, 0)
-                    TorrentSayText("The <green>GPS</green> picked up many threats nearby...", fancyText.TextSpeed.VeryFast, 1)
-                    DieselSayText("That's right...", fancyText.TextSpeed.VeryFast, 4)
-                    DieselSayText("So now you can see who's REALLY outnumbered!", fancyText.TextSpeed.VeryFast, 9)
                     DieselSayText("CARBON SQUAD! <shaky>AMBUSH!!!</shaky>", fancyText.TextSpeed.VeryFast, 16)
                     for (let value6 of tiles.getTilesByType(assets.tile`OilSwordsmanSpawner`)) {
                         OilHitbox = sprites.create(assets.image`OilHitbox`, SpriteKind.EnemyHitboxCutscene)
@@ -544,9 +534,9 @@ function CUTSCENE() {
                     timer.after(1500, function () {
                         color.startFadeFromCurrent(color.White, 100)
                         color.pauseUntilFadeDone()
+                        sprites.destroy(SpeechBalloon)
                         Lvl += 0.5
                         LevelSetup(Lvl)
-                        sprites.destroy(SpeechBalloon)
                         color.startFadeFromCurrent(color.originalPalette, 100)
                     })
                 })
