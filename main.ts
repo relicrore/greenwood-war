@@ -169,7 +169,7 @@ color.pauseUntilFadeDone()
 color.setPalette(
 color.originalPalette
 )
-Lvl = 6 //blockSettings.readNumber("Lvl")
+Lvl = blockSettings.readNumber("Lvl")
 SongStopped = false
 scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`TitleLayer0`)
 scroller.scrollBackgroundWithSpeed(-10, 0, scroller.BackgroundLayer.Layer0)
