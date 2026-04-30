@@ -15,4 +15,5 @@ namespace SpriteKind {
     export const RivalImage = SpriteKind.create()
     export const EnemyHitboxCutscene = SpriteKind.create()
     export const AquiferImage = SpriteKind.create()
+    export const Text = SpriteKind.create()
 }
