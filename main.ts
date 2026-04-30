@@ -169,7 +169,7 @@ color.pauseUntilFadeDone()
 color.setPalette(
 color.originalPalette
 )
-Lvl = blockSettings.readNumber("Lvl")
+let Lvl = blockSettings.readNumber("Lvl")
 SongStopped = false
 scroller.setLayerImage(scroller.BackgroundLayer.Layer0, assets.image`TitleLayer0`)
 scroller.scrollBackgroundWithSpeed(-10, 0, scroller.BackgroundLayer.Layer0)
@@ -185,3 +185,7 @@ color.setColor(8, color.parseColorString("#aaffff"))
 color.setColor(11, color.parseColorString("#004466"))
 color.setColor(12, color.parseColorString("#000044"))
 CreateMainMenu()
+
+game.onUpdate(function() {
+    console.log(blockSettings.readNumber("Lvl"))
+})
