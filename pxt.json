@@ -23,7 +23,9 @@
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "sprite-scaling": "*",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
-        "arcade-multi-events": "github:riknoll/arcade-multi-events#764fdc7d175d66740bf5bef4a6aa2dfd40722381"
+        "arcade-multi-events": "github:riknoll/arcade-multi-events#764fdc7d175d66740bf5bef4a6aa2dfd40722381",
+        "BARRIER_font_small (font)": "pub:64039-92060-94129-45768",
+        "arcade-custom-instruments": "github:riknoll/arcade-custom-instruments#6f81814d7d77a1ac7b97e4d631cbbc3654f2ec64"
     },
     "files": [
         "images.g.jres",

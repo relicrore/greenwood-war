@@ -19,7 +19,6 @@ let MISSION = 0
 let KILLS = 0
 let PineconeNumber = 0
 let SwordHitsLeft = 0
-let Lvl = 0
 let LvName = ""
 
 //Levels
@@ -283,8 +282,10 @@ game.onUpdate(function () {
 
 //Level saving
 game.onUpdate(function () {
-    blockSettings.writeNumber("Lvl", Lvl)
-    Lvl = blockSettings.readNumber("Lvl")
+    if (Lvl >= 0) {
+        blockSettings.writeNumber("Lvl", Lvl)
+        Lvl = blockSettings.readNumber("Lvl")
+    }
 })
 
 //Player overlaps
