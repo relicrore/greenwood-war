@@ -318,16 +318,6 @@ function CUTSCENE() {
                         color.startFadeFromCurrent(color.originalPalette, 100)
                     })
                 })
-            } else if (MISSION == 7.5) {
-                CreateTextSprite()
-                AquiferSayText("<teal>Torrent</teal>, is there anything we should have while we're here?", fancyText.TextSpeed.Fast, 2)
-                TorrentSayText("Yes. The volcano gives off a lot of radiation.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("I've updated your <yellow>Monitor</yellow> so you can see your radiation level.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("There are Radiation Packs around the volcano. They'll heal you.", fancyText.TextSpeed.Fast, 0)
-                RadiationBar = true
-                sprites.destroy(SpeechBalloon)
-                sprites.destroy(CharBox)
-                MoveAbility = true
             }
         } else {
             if (MISSION == 1) {
@@ -493,7 +483,7 @@ function CUTSCENE() {
                 CreateTextSprite()
                 TorrentSayText("I've updated your <yellow>Monitor</yellow>.", fancyText.TextSpeed.Fast, 0)
                 TorrentSayText("The volcano gives off a lot of radiation.", fancyText.TextSpeed.Fast, 0)
-                TorrentSayText("You should be able to see your radiation level.", fancyText.TextSpeed.Fast, 0)
+                TorrentSayText("You'll be able to see your radiation level.", fancyText.TextSpeed.Fast, 0)
                 TorrentSayText("There are Radiation Packs around the volcano.", fancyText.TextSpeed.Fast, 0)
                 TorrentSayText("They'll heal you.", fancyText.TextSpeed.Fast, 0)
                 RadiationBar = true
